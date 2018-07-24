@@ -1,0 +1,13 @@
+
+
+<div class="container">
+  <% @searches.each do |search| %>
+    <div class="col-xs-6 col-sm-3">
+      <div class="searches-card">
+        <div class="searches-title">
+          <%= link_to "#{search.title}", search_path(search) %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

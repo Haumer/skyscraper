@@ -1,0 +1,8 @@
+
+<% if @searches.nil? %>
+<% else %>
+  <% @searches.each do |e| %>
+    <%= e.title %>
+    <br>
+  <% end %>
+<% end %>

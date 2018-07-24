@@ -1,0 +1,26 @@
+span {
+  font-size: 13px
+}
+
+.card {
+  margin: 7px 0 7px 7px;
+  border-left: solid;
+  padding: 7px 0 7px 10px;
+  border-radius: 3px;
+}
+
+.all-cards a {
+  color: #333333;
+  text-decoration: none;
+}
+
+.card:hover {
+  background-color: white;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.overall-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

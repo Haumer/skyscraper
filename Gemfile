@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 ruby '2.5.1'
 
-
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
 gem 'devise'
 gem 'jbuilder', '~> 2.0'
 gem 'pg', '~> 0.21'
@@ -16,6 +17,7 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
+gem 'nokogiri'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

@@ -1,0 +1,52 @@
+
+
+<div class="container">
+  <div class="job-card">
+    <div>
+      Job Title: <%= @job.title %>
+    </div>
+    <div>
+      Company: <%= @job.company %>
+    </div>
+    <div>
+      Salary: <%= @job.salary %>
+    </div>
+    <div>
+      Location: <%= @job.location %>
+    </div>
+    <div>
+      Link: <%= @job.link %>
+    </div>
+  </div>
+  <div class="divider">
+
+  </div>
+  <div class="similar-jobs">
+  <% company_filtered = @jobs.where(company: @job.company) %>
+  <h4>Similar Jobs:</h4>
+  <% company_filtered.each do |filtered| %>
+    <div class="similar-jobs-card">
+      <% if filtered.link == @job.link %>
+      <% else %>
+        <div>
+        </div>
+        <div>
+          Job Title: <%= filtered.title %>
+        </div>
+        <div>
+          Company: <%= filtered.company %>
+        </div>
+        <div>
+          Salary: <%= filtered.salary %>
+        </div>
+        <div>
+          Location: <%= filtered.location %>
+        </div>
+        <div>
+          Link: <%= filtered.link %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  </div>
+</div>
