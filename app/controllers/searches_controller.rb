@@ -4,15 +4,22 @@ require 'open-uri'
 class SearchesController < ApplicationController
   def index
     @searches = Search.where(user_id: current_user.id)
+    @jobs = Jobs.where(id: search_id)
   end
 
   def show
     @search = Search.find(params[:id])
-    @jobs = Job.where(search_id: @search.id)
+    @jobs = Job.where(search_id: @search.id).order(quality: :desc)
+    # UpdateQualityJob.perform_later(@search.id, @search.location)
+    respond_to :html, :js
   end
 
   def new
     @search = Search.new
+  end
+
+  def top
+
   end
 
   def scrape!(keyword, search_id)
@@ -21,10 +28,9 @@ class SearchesController < ApplicationController
     @escape_the_city_counter = 0
     @cvlibrary_counter = 0
     @jobsite_counter = 0
-    pages = 5
+    pages = 10
 
     pages.times do
-
       begin
         page = Nokogiri::HTML(open("https://www.cv-library.co.uk/search-jobs?distance=15&fp=1&geo=#{search_location}&offset=#{@cvlibrary_counter}&posted=28&q=#{search_term}&salarymax=&salarymin=&salarytype=annum&search=1&tempperm=Any"))
         page.search(".job-search-description").each do |result_card|
@@ -106,6 +112,7 @@ class SearchesController < ApplicationController
       ScrapeJob.perform_later(@search.title, @search.id)
       # scrape!(@search.title, @search.id)
       redirect_to search_path(@search)
+      # UpdateQualityJob.perform_later(@search.id)
     else
       render :new
     end

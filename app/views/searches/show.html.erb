@@ -24,6 +24,9 @@
 
   <div class="container">
     <div class="overall-info">
+      <div class="search_keyword">
+        <h5>You searched for: <%= @search.title %></h5>
+      </div>
       <div class="average-salary">
         <h5>
           Average Salary of displayed: <%= avg_salary %>
@@ -31,11 +34,13 @@
       </div>
       <div class="results">
         <h5>
-          Results: <%= @jobs.length %>
+          Nr of Results: <%= @jobs.length %>
         </h5>
       </div>
     </div>
     <% @jobs.each do |job| %>
+        <% job.salary.gsub(/.00/, "") %>
+        <% job.save %>
         <div class="col-xs-12 col-sm-4">
           <div class="all-cards">
             <%= link_to job_path(job) do %>
@@ -43,7 +48,7 @@
                 <div>
                   <% if job.title.length > 35 %>
                   <% job_title_chars_array = [] %>
-                     <span> Job Title: <%= job_title_chars_array.concat(job.title.chars[(0..34)]).join + "..." %></span>
+                     <span> Job Title: <%= job_title_chars_array.concat(job.title.chars[(0..34)]).join.capitalize + "..." %></span>
                   <% else %>
                     <span>Job Title: <%= job.title %></span>
                   <% end %>
@@ -71,6 +76,9 @@
                   <% else %>
                     <span>Location: <%= job.location %></span>
                   <% end %>
+                </div>
+                <div>
+                  Quality: <%= job.quality %>
                 </div>
               </div>
             <% end %>

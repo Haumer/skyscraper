@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.5.1'
 
+gem 'jquery-rails'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
 gem 'devise'

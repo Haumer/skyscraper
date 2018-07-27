@@ -5,7 +5,10 @@
     <div class="col-xs-6 col-sm-3">
       <div class="searches-card">
         <div class="searches-title">
-          <%= link_to "#{search.title}", search_path(search) %>
+          <%= link_to search_path(search) do %>
+            <%= search.title %>
+            <%= @jobs.length %>
+          <% end %>
         </div>
       </div>
     </div>

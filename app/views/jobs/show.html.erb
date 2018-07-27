@@ -9,13 +9,25 @@
       Company: <%= @job.company %>
     </div>
     <div>
-      Salary: <%= @job.salary %>
+      <% if @job.salary.include?("k") %>
+        Salary: <%= @job.salary %>
+      <% else %>
+        Salary: <%= @job.salary %>
+      <% end %>
     </div>
     <div>
       Location: <%= @job.location %>
     </div>
     <div>
-      Link: <%= @job.link %>
+      Link:
+      <%= link_to @job.link do %>
+        <%= @job.website %>
+        <%#= link_to @job.link, "https://#{@job.website}" %>
+      <% end %>
+    </div>
+    <div>
+
+      Counter: <%= @job.quality %>
     </div>
   </div>
   <div class="divider">
@@ -43,7 +55,11 @@
           Location: <%= filtered.location %>
         </div>
         <div>
-          Link: <%= filtered.link %>
+          Link:
+          <%= link_to filtered.link do %>
+            <%= filtered.website %>
+          <% end %>
+          <%#= link_to filtered.link, "http://#{filtered.website}" %>
         </div>
       <% end %>
     </div>

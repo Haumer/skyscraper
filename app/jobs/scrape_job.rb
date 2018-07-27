@@ -210,7 +210,6 @@ class ScrapeJob < ApplicationJob
         end
       end
       @ziprecruiter_counter += 1
-
     end
   end
 end
