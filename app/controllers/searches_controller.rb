@@ -4,7 +4,7 @@ require 'open-uri'
 class SearchesController < ApplicationController
   def index
     @searches = Search.where(user_id: current_user.id)
-    @jobs = Jobs.where(id: search_id)
+    # @jobs = Jobs.where(id: search_id)
   end
 
   def show

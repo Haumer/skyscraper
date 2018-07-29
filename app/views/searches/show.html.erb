@@ -48,33 +48,33 @@
                 <div>
                   <% if job.title.length > 35 %>
                   <% job_title_chars_array = [] %>
-                     <span> Job Title: <%= job_title_chars_array.concat(job.title.chars[(0..34)]).join.capitalize + "..." %></span>
+                     <span> <b> Job Title: </b> <%= job_title_chars_array.concat(job.title.chars[(0..34)]).join.capitalize + "..." %></span>
                   <% else %>
-                    <span>Job Title: <%= job.title %></span>
+                    <span><b>Job Title: </b> <%= job.title %></span>
                   <% end %>
                 </div>
                 <div>
                   <% if job.company.length > 35 %>
                   <% job_company_chars_array = [] %>
-                    <span> Company: <%= job_company_chars_array.concat(job.company.chars[(0..34)]).join + "..." %></span>
+                    <span> <b>Company: </b> <%= job_company_chars_array.concat(job.company.chars[(0..34)]).join + "..." %></span>
                   <% else %>
-                    <span>Company: <%= job.company %></span>
+                    <span><b>Company: </b> <%= job.company %></span>
                   <% end %>
                 </div>
                 <div>
                   <% if job.salary.length > 35 %>
                   <% job_salary_chars_array = [] %>
-                    <span> Salary: <%= job_salary_chars_array.concat(job.salary.chars[(0..34)]).join + "..." %></span>
+                    <span> <b>Salary: </b> <%= job_salary_chars_array.concat(job.salary.chars[(0..34)]).join + "..." %></span>
                   <% else %>
-                    <span>Salary: <%= job.salary %></span>
+                    <span><b>Salary: </b> <%= job.salary %></span>
                   <% end %>
                 </div>
                 <div>
                   <% if job.location.length > 35 %>
                   <% job_location_chars_array = [] %>
-                    <span> location: <%= job_location_chars_array.concat(job.location.chars[(0..34)]).join + "..." %></span>
+                    <span><b>Location:</b> <%= job_location_chars_array.concat(job.location.chars[(0..34)]).join + "..." %></span>
                   <% else %>
-                    <span>Location: <%= job.location %></span>
+                    <span><b>Location: </b> <%= job.location %></span>
                   <% end %>
                 </div>
                 <div>
