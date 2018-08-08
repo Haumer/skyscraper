@@ -5,15 +5,18 @@
   <% sorted.each do |search| %>
     <div class="col-xs-6 col-sm-3">
       <div class="searches-card">
-        <div class="searches-title">
+        <div class="all-cards">
           <%= link_to search_path(search) do %>
             <div class="card">
               <div>
-              <%= search.title.capitalize %>
+                <b>Search: </b> <%= search.title.capitalize %>
+              </div>
+              <div>
+                <b>Nr° of Results: </b><%= search.job.count %>
               </div>
               <div>
                 <% date_array = search.created_at.to_s.split.first.split("-") %>
-                <%= Date.new(date_array[0].to_i, date_array[1].to_i, date_array[2].to_i).strftime('%e %b %Y') %>
+                <b>Date: </b> <%= Date.new(date_array[0].to_i, date_array[1].to_i, date_array[2].to_i).strftime('%e %b %Y') %>
               </div>
             </div>
           <% end %>
@@ -22,3 +25,5 @@
     </div>
   <% end %>
 </div>
+
+

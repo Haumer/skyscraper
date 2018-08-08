@@ -18,8 +18,12 @@ class SearchesController < ApplicationController
     @search = Search.new
   end
 
-  def top
-
+  def favourite
+    if !current_user.liked @job
+      @job.liked_by current_user
+    elsif current_user.liked @job
+      @job.unliked_by current_user
+    end
   end
 
   def scrape!(keyword, search_id)

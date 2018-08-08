@@ -7,7 +7,15 @@ Rails.application.routes.draw do
   root to: 'searches#new'
   resources :scrapers
   resources :searches
-  resources :jobs
+  resources :jobs do
+    collection do
+      get "favourite", to: "jobs#favourite"
+    end
+    member do
+      put "like" => "jobs#upvote"
+      put "dislike" => "jobs#downvote"
+    end
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

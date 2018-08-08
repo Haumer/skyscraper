@@ -16,7 +16,7 @@ class ScrapeJob < ApplicationJob
     @monster_counter = 0
     @jobsite_counter = 0
     @jobstoday_counter = 0
-    pages = 5
+    pages = 10
 
     pages.times do
 

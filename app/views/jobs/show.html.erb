@@ -20,10 +20,19 @@
     </div>
     <div>
       Link:
-      <%= link_to @job.link do %>
-        <%= @job.website %>
-        <%#= link_to @job.link, "https://#{@job.website}" %>
+
+      <% if @job.link.include?("https://") %>
+        <%= link_to @job.link do %>
+          <%= @job.website %>
+        <% end %>
+      <% else %>
+        <% @job.link = "https://" + @job.link %>
+        <% @job.save %>
+        <%= link_to @job.link do %>
+          <%= @job.website %>
+        <% end %>
       <% end %>
+        <%#= link_to @job.link, "https://#{@job.website}" %>
     </div>
     <div>
 

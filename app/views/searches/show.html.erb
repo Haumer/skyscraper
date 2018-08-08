@@ -80,6 +80,19 @@
                 <div>
                   Quality: <%= job.quality %>
                 </div>
+                <div>
+                  <% if current_user.liked? job %>
+                    <%= link_to dislike_job_path(job), class: "dislike", method: :put do %>
+                      <i class="fas fa-star"></i>
+                      <%= job.get_upvotes.size %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to like_job_path(job), class: "like", method: :put do %>
+                      <i class="far fa-star"></i>
+                      <%= job.get_upvotes.size %>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
             <% end %>
           </div>
