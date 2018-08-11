@@ -122,6 +122,10 @@ class SearchesController < ApplicationController
     end
   end
 
+  def stats
+
+  end
+
   private
 
   def search_params

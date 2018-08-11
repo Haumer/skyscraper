@@ -3,7 +3,7 @@
 <div class="container">
   <% sorted = @searches.sort_by { |e| e.created_at }.reverse %>
   <% sorted.each do |search| %>
-    <div class="col-xs-6 col-sm-3">
+    <div class="col-xs-6 col-sm-4">
       <div class="searches-card">
         <div class="all-cards">
           <%= link_to search_path(search) do %>

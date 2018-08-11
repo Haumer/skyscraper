@@ -21,6 +21,6 @@ class JobsController < ApplicationController
   end
 
   def favourite
-    @jobs = Job.all.order(:cached_votes_score => :desc).where(cached_votes_total: 1)
+    @jobs = Job.all.order(:cached_votes_score => :desc).where(cached_votes_up: 1)
   end
 end

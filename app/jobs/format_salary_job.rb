@@ -11,6 +11,8 @@ class FormatSalaryJob < ApplicationJob
         p sal
         job.salary = sal
         job.save
+        job.salary_format = true
+        job.save
       elsif job.salary.scan(/\d/).length == 6 && job.salary.include?("-")
         sa = job.salary.scan(/\d/)
         p sa
@@ -18,9 +20,13 @@ class FormatSalaryJob < ApplicationJob
         p sal
         job.salary = sal
         job.save
+        job.salary_format = true
+        job.save
       elsif job.salary.include?("per annum") || job.salary.include?("pa")
         sa = job.salary.gsub(/per annum/, "").gsub(/pa/, "").strip
         job.salary = sa
+        job.save
+        job.salary_format = true
         job.save
       end
     end
