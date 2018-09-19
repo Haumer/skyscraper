@@ -6,6 +6,7 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
     @jobs = Job.all.order(:quality)
+    @similar_jobs = Job.order(quality: :desc)
   end
 
   def upvote

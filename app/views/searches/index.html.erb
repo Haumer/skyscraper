@@ -12,7 +12,7 @@
                 <b>Search: </b> <%= search.title.capitalize %>
               </div>
               <div>
-                <b>Nr° of Results: </b><%= search.job.count %>
+                <b>Nr° of Results: </b> <%= search.job.count %>
               </div>
               <div>
                 <% date_array = search.created_at.to_s.split.first.split("-") %>
@@ -25,5 +25,4 @@
     </div>
   <% end %>
 </div>
-
 

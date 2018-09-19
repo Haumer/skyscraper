@@ -1,7 +1,7 @@
 
 
 <div class="container">
-  <div class="job-card">
+  <div class="job-card first-jobs-card">
     <div>
       Job Title: <%= @job.title %>
     </div>
@@ -34,44 +34,43 @@
       <% end %>
         <%#= link_to @job.link, "https://#{@job.website}" %>
     </div>
-    <div>
-
-      Counter: <%= @job.quality %>
-    </div>
   </div>
   <div class="divider">
 
   </div>
-  <div class="similar-jobs">
-  <% company_filtered = @jobs.where(company: @job.company) %>
-  <h4>Similar Jobs:</h4>
-  <% company_filtered.each do |filtered| %>
-    <div class="similar-jobs-card">
-      <% if filtered.link == @job.link %>
-      <% else %>
-        <div>
-        </div>
-        <div>
-          Job Title: <%= filtered.title %>
-        </div>
-        <div>
-          Company: <%= filtered.company %>
-        </div>
-        <div>
-          Salary: <%= filtered.salary %>
-        </div>
-        <div>
-          Location: <%= filtered.location %>
-        </div>
-        <div>
-          Link:
-          <%= link_to filtered.link do %>
-            <%= filtered.website %>
+    <div class="similar-jobs">
+      <% company_filtered = @similar_jobs.where(company: @job.company) %>
+      <h4>Similar Jobs:</h4>
+      <% company_filtered.each do |filtered| %>
+      <div class="col-xs-6">
+          <% if filtered.link != @job.link || @job.title != nil %>
+            <% farray = [] %>
+            <% farray << filtered %>
+            <% farray.each do |element|  %>
+          <div class="similar-jobs-card">
+            <div>
+              Job Title: <%= element.title %>
+            </div>
+            <div>
+              Company: <%= element.company %>
+            </div>
+            <div>
+              Salary: <%= element.salary %>
+            </div>
+            <div>
+              Location: <%= element.location %>
+            </div>
+            <div>
+              Link:
+              <%= link_to element.link do %>
+                <%= element.website %>
+              <% end %>
+              <%#= link_to filtered.link, "http://#{filtered.website}" %>
+            </div>
+          </div>
           <% end %>
-          <%#= link_to filtered.link, "http://#{filtered.website}" %>
-        </div>
+          <% end %>
+      </div>
       <% end %>
     </div>
-  <% end %>
-  </div>
 </div>
