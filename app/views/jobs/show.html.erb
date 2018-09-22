@@ -39,7 +39,7 @@
 
   </div>
     <div class="similar-jobs">
-      <% company_filtered = @similar_jobs.where(company: @job.company) %>
+      <% company_filtered = @similar_jobs.where(company: @job.company).where(search_id: @job.search_id) %>
       <h4>Similar Jobs:</h4>
       <% company_filtered.each do |filtered| %>
       <div class="col-xs-6">

@@ -16,6 +16,7 @@ class ScrapeJob < ApplicationJob
     @monster_counter = 0
     @jobsite_counter = 0
     @jobstoday_counter = 0
+    @cwjobs_counter = 1
     pages = 10
 
     pages.times do
@@ -210,6 +211,30 @@ class ScrapeJob < ApplicationJob
         end
       end
       @ziprecruiter_counter += 1
+
+      if @cwjobs_counter == 1
+        page = Nokogiri::HTML(open("https://www.cwjobs.co.uk/jobs/#{search_term}/in-#{search_location}?radius=10&s=header"))
+      else
+        page = Nokogiri::HTML(open("https://www.cwjobs.co.uk/jobs/#{search_term}/in-#{search_location}?radius=10&s=header&page=#{@cwjobs_counter}"))
+      end
+      page.search(".job").each do |element|
+        title = element.search(".job-title").text.strip.gsub(/\s{1,}/, " ")
+        salary = element.search(".salary").text.strip.gsub(/\s{1,}/, " ").gsub(/UKP/, "£").gsub(/k /, "000 ").strip
+        company = element.search(".company").text.strip
+        location = element.search(".location").text.strip.gsub(/\s{1,}/, " ").strip
+        website = "www.cwjobs.co.uk"
+        link = element.search("a").first['href']
+        Job.create(
+          title: title,
+          location: location,
+          website: website,
+          salary: salary,
+          company: company,
+          link: link,
+          search_id: search_id
+        )
+      end
+      @cwjobs_counter += 1
     end
   end
 end

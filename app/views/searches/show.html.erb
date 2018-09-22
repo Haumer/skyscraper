@@ -38,66 +38,7 @@
         </h5>
       </div>
     </div>
-    <% @jobs.each do |job| %>
-        <% job.salary.gsub(/.00/, "") %>
-        <% job.save %>
-        <div class="col-xs-12 col-sm-4">
-          <div class="all-cards">
-            <%= link_to job_path(job) do %>
-              <div class="card">
-                <div>
-                  <% if job.title.length > 35 %>
-                  <% job_title_chars_array = [] %>
-                     <span> <b> Job Title: </b> <%= job_title_chars_array.concat(job.title.chars[(0..34)]).join.capitalize + "..." %></span>
-                  <% else %>
-                    <span><b>Job Title: </b> <%= job.title %></span>
-                  <% end %>
-                </div>
-                <div>
-                  <% if job.company.length > 35 %>
-                  <% job_company_chars_array = [] %>
-                    <span> <b>Company: </b> <%= job_company_chars_array.concat(job.company.chars[(0..34)]).join + "..." %></span>
-                  <% else %>
-                    <span><b>Company: </b> <%= job.company %></span>
-                  <% end %>
-                </div>
-                <div>
-                  <% if job.salary.length > 35 %>
-                  <% job_salary_chars_array = [] %>
-                    <span> <b>Salary: </b> <%= job_salary_chars_array.concat(job.salary.chars[(0..34)]).join + "..." %></span>
-                  <% else %>
-                    <span><b>Salary: </b> <%= job.salary %></span>
-                  <% end %>
-                </div>
-                <div>
-                  <% if job.location.length > 35 %>
-                  <% job_location_chars_array = [] %>
-                    <span><b>Location:</b> <%= job_location_chars_array.concat(job.location.chars[(0..34)]).join + "..." %></span>
-                  <% else %>
-                    <span><b>Location: </b> <%= job.location %></span>
-                  <% end %>
-                </div>
-                <!-- <div>
-                  Quality: <%= job.quality %>
-                </div> -->
-                <div class="job-star">
-                  <% if current_user.liked? job %>
-                    <%= link_to dislike_job_path(job), class: "dislike", method: :put do %>
-                      <i class="fas fa-star"></i>
-                      <% job.get_upvotes.size %>
-                    <% end %>
-                  <% else %>
-                    <%= link_to like_job_path(job), class: "like", method: :put do %>
-                      <i class="far fa-star"></i>
-                      <% job.get_upvotes.size %>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-    <% end %>
+    <%= render "jobs", remote: true %>
   </div>
 <% end %>
 

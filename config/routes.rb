@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'searches#new'
   resources :scrapers
-  resources :searches
+  resources :searches do
+    collection do
+      get "stats", to: "searches#stats"
+    end
+  end
   resources :jobs do
     collection do
       get "favourite", to: "jobs#favourite"

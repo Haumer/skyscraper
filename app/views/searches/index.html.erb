@@ -3,26 +3,29 @@
 <div class="container">
   <% sorted = @searches.sort_by { |e| e.created_at }.reverse %>
   <% sorted.each do |search| %>
-    <div class="col-xs-6 col-sm-4">
-      <div class="searches-card">
-        <div class="all-cards">
-          <%= link_to search_path(search) do %>
-            <div class="card">
-              <div>
-                <b>Search: </b> <%= search.title.capitalize %>
+    <% if search.job.count == 0 %>
+    <% else %>
+      <div class="col-xs-6 col-sm-4">
+        <div class="searches-card">
+          <div class="all-cards">
+            <%= link_to search_path(search) do %>
+              <div class="card">
+                <div>
+                  <b>Search: </b> <%= search.title.capitalize %>
+                </div>
+                <div>
+                  <b>Nr° of Results: </b> <%= search.job.count %>
+                </div>
+                <div>
+                  <% date_array = search.created_at.to_s.split.first.split("-") %>
+                  <b>Date: </b> <%= Date.new(date_array[0].to_i, date_array[1].to_i, date_array[2].to_i).strftime('%e %b %Y') %>
+                </div>
               </div>
-              <div>
-                <b>Nr° of Results: </b> <%= search.job.count %>
-              </div>
-              <div>
-                <% date_array = search.created_at.to_s.split.first.split("-") %>
-                <b>Date: </b> <%= Date.new(date_array[0].to_i, date_array[1].to_i, date_array[2].to_i).strftime('%e %b %Y') %>
-              </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
 

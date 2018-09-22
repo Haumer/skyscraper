@@ -123,7 +123,10 @@ class SearchesController < ApplicationController
   end
 
   def stats
-
+    @jobs = Job.all
+    array = []
+    Job.all.each { |e| array << e.company }
+    @companys = array.uniq!
   end
 
   private
