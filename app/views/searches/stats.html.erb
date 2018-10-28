@@ -1,3 +1,50 @@
-Nr of Jobs Found: <%= @jobs.count %>
-<br>
-Nr of Companys Found: <%= @companys.count %>
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'Overall')">Overall</button>
+  <button class="tablinks" onclick="openCity(event, 'Recruiters')">Recruiters</button>
+  <button class="tablinks" onclick="openCity(event, 'All-Companies')">Companies</button>
+</div>
+
+<div id="Overall" class="tabcontent text-center">
+  <div class="col-sm-4">
+    Nr of Companys <%= @companys.count %>
+  </div>
+  <div class="col-sm-4">
+    Nr of Jobs <%= @jobs.count %>
+  </div>
+  <div class="col-sm-4">
+    Avg Jobs per Company: <%= @jobs.count / @companys.count %>
+  </div>
+</div>
+
+<div id="Recruiters" class="tabcontent">
+  <% @recru.each do |e| %>
+    <div class="col-sm-3">
+      <%= e %>
+    </div>
+  <% end %>
+</div>
+
+
+<div id="All-Companies" class="tabcontent">
+  <% @companys.each do |company| %>
+    <div class="col-sm-3">
+      <%= company %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+</script>

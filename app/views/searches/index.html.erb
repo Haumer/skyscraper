@@ -1,8 +1,7 @@
 
 
 <div class="container">
-  <% sorted = @searches.sort_by { |e| e.created_at }.reverse %>
-  <% sorted.each do |search| %>
+  <% @searches_ordered.each do |search| %>
     <% if search.job.count == 0 %>
     <% else %>
       <div class="col-xs-6 col-sm-4">
