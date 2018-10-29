@@ -39,14 +39,18 @@ class SearchesController < ApplicationController
   def stats
     @jobs = Job.all
     array = []
-    Job.all.each { |e| array << e.company }
-    @companys = array.uniq!.sort
+    Job.all.each { |e| array << e.company.strip }
+    @companys = array.uniq.sort
     @recru = @companys.select { |e| e.include?("rec") || e.include?("Rec")}
+    @company_freq = array.group_by(&:itself).map { |k, v| "#{v.count}-#{k}" }
   end
 
   def dashboard
-    @searches = Search.all.where(user_id: current_user.id)
-    @jobs = @searches.jobs
+    @array = []
+    @searches = Search.all.where(user_id: current_user.id).order(created_at: :desc)
+    @searches.each { |search| @array <<search.title }
+    @title_freq = @array.group_by(&:itself).map { |k, v| "#{v.count}-#{k}" }.sort.reverse
+    @total = @title_freq.map { |element|element.split("-").first.to_i }
   end
 
   private

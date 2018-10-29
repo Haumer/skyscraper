@@ -7,6 +7,11 @@
 <div id="Overall" class="tabcontent text-center">
   <div class="col-sm-4">
     Nr of Companys <%= @companys.count %>
+    <br>
+    <% @company_freq.sort.reverse[0..4].each do |element| %>
+      <%= element.split("-").last %>: <%= element.split("-").first %>
+      <br>
+    <% end %>
   </div>
   <div class="col-sm-4">
     Nr of Jobs <%= @jobs.count %>
@@ -18,7 +23,7 @@
 
 <div id="Recruiters" class="tabcontent">
   <% @recru.each do |e| %>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       <%= e %>
     </div>
   <% end %>
@@ -27,7 +32,7 @@
 
 <div id="All-Companies" class="tabcontent">
   <% @companys.each do |company| %>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       <%= company %>
     </div>
   <% end %>

@@ -1,11 +1,11 @@
 /* Style the tab */
 .tab {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   overflow: hidden;
   border: 1px solid #ccc;
-  background-color: #f1f1f1;
+  background-color: skyblue;
 }
 
 /* Style the buttons inside the tab */
@@ -15,9 +15,10 @@
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 14px 16px;
+  padding: 14px 0px;
   transition: 0.3s;
   font-size: 17px;
+  width: 34%;
 }
 
 /* Change background color of buttons on hover */

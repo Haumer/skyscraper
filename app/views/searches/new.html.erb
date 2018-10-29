@@ -1,11 +1,11 @@
-
+<h3>Enter a Programming Language</h3>
 <div class="form-container">
-  <h3>Search</h3>
-  <div class="form">
-    <%= form_for(@search) do |f| %>
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-      <%= f.submit %>
-    <% end %>
+  <div class="col-sm-4 offset-sm-4">
+    <div class="form-inline">
+      <%= simple_form_for @search do |f| %>
+        <%= f.input :title, :input_html => { :class => 'search-new-title', :placeholder => "ruby" }%>
+        <%= f.button :submit %>
+      <% end %>
+    </div>
   </div>
 </div>

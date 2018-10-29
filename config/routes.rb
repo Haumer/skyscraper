@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :searches do
     collection do
       get "stats", to: "searches#stats"
+      get "dashboard", to: "searches#dashboard"
     end
   end
   resources :jobs do
