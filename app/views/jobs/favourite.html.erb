@@ -25,6 +25,10 @@
                 <%= job.website %>
               <% end %>
             </div>
+            <div>
+              Search Term:
+              <%= job.search.title.capitalize %>
+            </div>
             <div class="job-star">
               <% if current_user.liked? job %>
                 <%= link_to dislike_job_path(job), class: "dislike", method: :put do %>

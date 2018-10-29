@@ -3,8 +3,8 @@
   <div class="col-sm-4 offset-sm-4">
     <div class="form-inline">
       <%= simple_form_for @search do |f| %>
-        <%= f.input :title, :input_html => { :class => 'search-new-title', :placeholder => "ruby" }%>
-        <%= f.button :submit %>
+        <%= f.input :title, :input_html => { :class => 'search-new-title', :placeholder => "e.g. ruby"}%>
+        <%= f.button :submit, "Scrape!"%>
       <% end %>
     </div>
   </div>

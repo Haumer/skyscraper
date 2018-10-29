@@ -8,8 +8,8 @@
   <div class="col-sm-4">
     Nr of Companys <%= @companys.count %>
     <br>
-    <% @company_freq.sort.reverse[0..4].each do |element| %>
-      <%= element.split("-").last %>: <%= element.split("-").first %>
+    <% @company_freq[0..9].each do |element| %>
+      <%= element.first %>: <%= element.last %>
       <br>
     <% end %>
   </div>
@@ -18,6 +18,12 @@
   </div>
   <div class="col-sm-4">
     Avg Jobs per Company: <%= @jobs.count / @companys.count %>
+  </div>
+  <div class="col-sm-4">
+    <% @websites.reverse.each do |element| %>
+      <%= element.first %>: <%= element.last %>
+      <br>
+    <% end %>
   </div>
 </div>
 
