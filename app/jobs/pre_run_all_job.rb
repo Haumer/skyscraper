@@ -3,21 +3,25 @@ require "open-uri"
 class PreRunAllJob < ApplicationJob
   queue_as :default
 
-  def perform
+  def perform(title, id)
     puts "Starting ...."
     puts ""
     puts ""
     puts ""
 
-    @search = Search.new
-    @search.user_id = User.all.first
-    @search.title = "ruby"
-    @search.location = "london"
-    search_id = @search.id
-    search_term = @search.title
-    search_location = @search.location
-    @id = @search.id
-    @search.save
+    # @search = Search.new
+    # @search.user_id = User.all.first
+    # @search.title = "ruby"
+    # @search.location = "london"
+    # search_id = @search.id
+    # search_term = @search.title
+    # search_location = @search.location
+    # @id = @search.id
+    # @search.save
+    search_id = id
+    @id = id
+    search_term = title.downcase
+    search_location = "london"
 
     @indeed_counter = 0
     @cvlibrary_counter = 0
@@ -29,7 +33,7 @@ class PreRunAllJob < ApplicationJob
     @jobsite_counter = 0
     @jobstoday_counter = 0
     @cwjobs_counter = 1
-    pages = 10
+    pages = 3
 
     pages.times do
 
@@ -63,52 +67,55 @@ class PreRunAllJob < ApplicationJob
       end
       p "cvlibrary"
 
-      if @jobsite_counter.zero?
-        results = []
-        page = Nokogiri::HTML(open("https://www.jobsite.co.uk/jobs/#{search_term}/in-#{search_location}?radius=20"))
-        page.search(".job").each do |result_card|
-          if result_card.search("h2").text.strip.downcase.include?(search_term)
-            title = result_card.search("h2").text.strip
-            link = result_card.search("a").first['href']
-            location = result_card.search(".location").text.strip.gsub(/\s{1,}/, " ").split("-").first.strip
-            company = result_card.search(".company").text.strip
-            salary = result_card.search(".salary").text.strip.split("£").join("£ ")
-            website = "www.jobsite.com"
-            Job.create(
-              title: title,
-              location: location,
-              website: website,
-              salary: salary,
-              company: company,
-              link: link,
-              search_id: search_id
-            )
+      begin
+        if @jobsite_counter.zero?
+          results = []
+          page = Nokogiri::HTML(open("https://www.jobsite.co.uk/jobs/#{search_term}/in-#{search_location}?radius=20"))
+          page.search(".job").each do |result_card|
+            if result_card.search("h2").text.strip.downcase.include?(search_term)
+              title = result_card.search("h2").text.strip
+              link = result_card.search("a").first['href']
+              location = result_card.search(".location").text.strip.gsub(/\s{1,}/, " ").split("-").first.strip
+              company = result_card.search(".company").text.strip
+              salary = result_card.search(".salary").text.strip.split("£").join("£ ")
+              website = "www.jobsite.com"
+              Job.create(
+                title: title,
+                location: location,
+                website: website,
+                salary: salary,
+                company: company,
+                link: link,
+                search_id: search_id
+              )
+            end
           end
-        end
-        @jobsite_counter += 2
-      else
-        results = []
-        page = Nokogiri::HTML(open("https://www.jobsite.co.uk/jobs/#{search_term}/in-#{search_location}?radius=10&page=#{@jobsite_counter}"))
-        page.search(".job").each do |result_card|
-          if result_card.search("h2").text.strip.downcase.include?(search_term)
-            title = result_card.search("h2").text.strip
-            link = result_card.search("a").first['href']
-            location = result_card.search(".location").text.strip.gsub(/\s{1,}/, " ").split("-").first.strip
-            company = result_card.search(".company").text.strip
-            salary = result_card.search(".salary").text.strip.split("£").join("£ ")
-            website = "www.jobsite.com"
-            Job.create(
-              title: title,
-              location: location,
-              website: website,
-              salary: salary,
-              company: company,
-              link: link,
-              search_id: search_id
-            )
+          @jobsite_counter += 2
+        else
+          results = []
+          page = Nokogiri::HTML(open("https://www.jobsite.co.uk/jobs/#{search_term}/in-#{search_location}?radius=10&page=#{@jobsite_counter}"))
+          page.search(".job").each do |result_card|
+            if result_card.search("h2").text.strip.downcase.include?(search_term)
+              title = result_card.search("h2").text.strip
+              link = result_card.search("a").first['href']
+              location = result_card.search(".location").text.strip.gsub(/\s{1,}/, " ").split("-").first.strip
+              company = result_card.search(".company").text.strip
+              salary = result_card.search(".salary").text.strip.split("£").join("£ ")
+              website = "www.jobsite.com"
+              Job.create(
+                title: title,
+                location: location,
+                website: website,
+                salary: salary,
+                company: company,
+                link: link,
+                search_id: search_id
+              )
+            end
           end
-        end
         @jobsite_counter += 1
+        end
+      rescue
       end
       p "jobsite"
 
@@ -287,9 +294,13 @@ class PreRunAllJob < ApplicationJob
     puts "I formatted the Salary"
     SingleFormatTitleJob.perform_later(@id)
     puts "I formatted the Title"
+    sleep(3)
     UpdateQualityJob.perform_later(@id, search_location)
     puts "I updated the quality"
+    SingleRemoveDuplicatesJob.perform_later(@id)
+    puts "I have removed duplicates"
+
     # Do something later
-    @search.save
+    # @search.save
   end
 end
