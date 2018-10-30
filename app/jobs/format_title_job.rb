@@ -9,6 +9,7 @@ class FormatTitleJob < ApplicationJob
          a << c.capitalize
       end
       e.title = a.join(" ")
+      p e.title
       e.save
     end
   end

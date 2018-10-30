@@ -33,7 +33,7 @@ class PreRunAllJob < ApplicationJob
     @jobsite_counter = 0
     @jobstoday_counter = 0
     @cwjobs_counter = 1
-    pages = 3
+    pages = 5
 
     pages.times do
 
