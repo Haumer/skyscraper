@@ -21,9 +21,9 @@
 
 <div id="Top-Jobs" class="tabcontent">
   <div class="seach-keywords">
-    <% @title_freq.each do |element| %>
-      <% count = ((element.split("-").first.to_f / @total.sum) * 100).to_i %>
-      <%= element.split("-").first %>: <%= element.split("-").last %>
+    <% @total.each do |element| %>
+      <% count = ((element.last.to_f / @total.map {|e| e.last}.sum) * 100).to_i %>
+      <%= element.first %>: <%= element.last %>
       <br>
       <div class="graph">
         <% if count < 1 %>

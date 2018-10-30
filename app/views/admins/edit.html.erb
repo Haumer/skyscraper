@@ -1,0 +1,8 @@
+<% if current_user.admin == true %>
+  <div class="col-xs-4 col-offset-4">
+    <%= simple_form_for @admin do |f| %>
+      <%= f.input :pages %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+<% end %>

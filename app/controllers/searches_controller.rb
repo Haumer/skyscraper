@@ -59,10 +59,11 @@ class SearchesController < ApplicationController
 
   def dashboard
     @array = []
+    hash = {}
     @searches = Search.all.where(user_id: current_user.id).order(created_at: :desc)
-    @searches.each { |search| @array <<search.title }
-    @title_freq = @array.group_by(&:itself).map { |k, v| "#{v.count}-#{k}" }.sort.reverse
-    @total = @title_freq.map { |element|element.split("-").first.to_i }
+    @searches.each { |search| @array << search.title }
+    @title_freq = @array.group_by(&:itself).map { |k, v| hash[k] = v.count }
+    @total = hash.sort_by { |_k, v| v.to_i }.reverse
   end
 
   private

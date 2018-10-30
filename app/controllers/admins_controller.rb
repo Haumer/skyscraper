@@ -1,0 +1,21 @@
+class AdminsController < ApplicationController
+  def admin_panel
+    if current_user.admin == true
+    end
+  end
+
+  def edit
+    @admin = Admin.find(params[:id])
+  end
+
+  def update
+    @admin = Admin.find(params[:id])
+    @admin.update(params[admin_params])
+  end
+
+  private
+
+  def admin_params
+    params.require(:admin).permit(:pages)
+  end
+end
