@@ -10,7 +10,8 @@ class AdminsController < ApplicationController
 
   def update
     @admin = Admin.find(params[:id])
-    @admin.update(params[admin_params])
+    @admin.update(admin_params)
+    redirect_to edit_admin_path(@admin)
   end
 
   private

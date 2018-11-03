@@ -28,6 +28,7 @@ class SearchesController < ApplicationController
   def create
     @search = Search.new(search_params)
     @search.user = current_user
+    @search.pages = Admin.all.first.pages
     if @search.save
       @search.save
       PreRunAllJob.perform_later(@search.title, @search.id)
