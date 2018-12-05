@@ -6,6 +6,8 @@ class AdminsController < ApplicationController
 
   def edit
     @admin = Admin.find(params[:id])
+    @jobs = Job.all
+    @searches = Search.all
   end
 
   def update

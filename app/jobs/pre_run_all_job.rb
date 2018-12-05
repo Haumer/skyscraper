@@ -44,7 +44,7 @@ class PreRunAllJob < ApplicationJob
       reed: false,
       ziprecruiter: false,
     }
-
+    puts "Admin told me to scraper #{pages} pages"
     pages.times do
 
       if rescued[:cvlibrary] == false
@@ -62,7 +62,7 @@ class PreRunAllJob < ApplicationJob
                 salary = result_card.search("#js-salary-details").text.strip.gsub(/Â/, "").split("/").first.split("£").join("£ ")
               end
               website = "www.cv-library.co.uk"
-              Job.create(
+              Job.create!(
                 title: title,
                 location: location,
                 website: website,
@@ -75,7 +75,7 @@ class PreRunAllJob < ApplicationJob
           end
           @cvlibrary_counter += 25
           p "cvlibrary"
-        rescue
+        rescue StandardError => e
           p "cvlibrary out of pages"
           rescued[:cvlibrary] == true
         end
@@ -95,7 +95,7 @@ class PreRunAllJob < ApplicationJob
                 company = result_card.search(".company").text.strip
                 salary = result_card.search(".salary").text.strip.split("£").join("£ ")
                 website = "www.jobsite.com"
-                Job.create(
+                Job.create!(
                   title: title,
                   location: location,
                   website: website,
@@ -117,7 +117,7 @@ class PreRunAllJob < ApplicationJob
                 company = result_card.search(".company").text.strip
                 salary = result_card.search(".salary").text.strip.split("£").join("£ ")
                 website = "www.jobsite.com"
-                Job.create(
+                Job.create!(
                   title: title,
                   location: location,
                   website: website,
@@ -131,7 +131,7 @@ class PreRunAllJob < ApplicationJob
           @jobsite_counter += 1
           end
           p "jobsite"
-        rescue
+        rescue StandardError => e
           p "jobsite out of pages"
           rescued[:jobsite] == true
         end
@@ -148,7 +148,7 @@ class PreRunAllJob < ApplicationJob
             company = link.split("-at-")[1].gsub(/-/, " ").capitalize
             salary = "-"
             website = "www.escapethecity.org"
-            Job.create(
+            Job.create!(
               title: title,
               location: location,
               website: website,
@@ -159,7 +159,7 @@ class PreRunAllJob < ApplicationJob
             )
           end
           p "escape the city"
-        rescue
+        rescue StandardError => e
           p "escapethecity is out of pages"
           rescued[:escapethecity] == true
         end
@@ -178,7 +178,7 @@ class PreRunAllJob < ApplicationJob
               company = result_card.search(".lister__meta-item--recruiter").text.strip
               salary = result_card.search(".lister__meta-item--salary").text.strip.split("£").join("£ ")
               website = "www.jobstoday.co.uk"
-              Job.create(
+              Job.create!(
                 title: title,
                 location: location,
                 website: website,
@@ -190,7 +190,7 @@ class PreRunAllJob < ApplicationJob
             end
           end
           p "jobstoday"
-        rescue
+        rescue StandardError => e
           p "jobstoday is out of pages"
           rescued[:jobstoday] == true
         end
@@ -211,7 +211,7 @@ class PreRunAllJob < ApplicationJob
                 salary = result_card.search(".no-wrap").text.strip.split("£").join("£ ")
               end
               website = "www.indeed.co.uk"
-              Job.create(
+              Job.create!(
                 title: title,
                 location: location,
                 website: website,
@@ -224,7 +224,8 @@ class PreRunAllJob < ApplicationJob
           end
           p "indeed"
           @indeed_counter += 10
-        rescue
+        rescue StandardError => e
+          puts e.message
           p "indeed is out of pages"
           rescued[:indeed] == true
         end
@@ -242,7 +243,7 @@ class PreRunAllJob < ApplicationJob
               company = result_card.search(".company").text.strip
               salary = result_card.search(".salary").text.strip.split("£").join("£ ")
               website = "www.totaljobs.com"
-              Job.create(
+              Job.create!(
                 title: title,
                 location: location,
                 website: website,
@@ -272,7 +273,7 @@ class PreRunAllJob < ApplicationJob
               company = result_card.search(".gtmJobListingPostedBy").text.strip
               salary = result_card.search(".salary").text.strip.split("£").join("£ ")
               website = "www.reed.co.uk"
-              Job.create(
+              Job.create!(
                 title: title,
                 location: location,
                 website: website,
@@ -302,7 +303,7 @@ class PreRunAllJob < ApplicationJob
               company = result_card.search(".name").text.strip
               website = "www.ziprecruiter.co.uk"
               salary = "-"
-              Job.create(
+              Job.create!(
                 title: title,
                 location: location,
                 website: website,
@@ -340,7 +341,7 @@ class PreRunAllJob < ApplicationJob
         #   location = element.search(".location").text.strip.gsub(/\s{1,}/, " ").strip
         #   website = "www.cwjobs.co.uk"
         #   link = element.search("a").first['href']
-        #   Job.create(
+        #   Job.create!(
         #     title: title,
         #     location: location,
         #     website: website,

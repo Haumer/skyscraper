@@ -1,4 +1,4 @@
 class Search < ApplicationRecord
+  has_many :jobs
   belongs_to :user
-  has_many :job
 end

@@ -1,44 +1,44 @@
-<% if @jobs.length == 0 %>
-  Loading your jobs!
-<% else %>
-  <% array_of_salary = []%>
-  <% @jobs.each do |job| %>
-    <% if job.salary != "-" || job.salary.nil? %>
-      <% salary = job.salary.gsub(/,/, "").gsub(/\D+/, " ").strip.to_i %>
-      <% if job.salary_format == true %>
-        <% array_se = job.salary.split("-") %>
-        <% se = array_se.map { |e| e.gsub(/,/, "").gsub(/\D+/, " ").strip.to_i } %>
-        <% salary = se.sum / se.length %>
-        <% array_of_salary << salary %>
+<% cache @search do %>
+  <% if @jobs.length == 0 %>
+    Loading your jobs!
+  <% else %>
+    <% array_of_salary = []%>
+    <% @jobs.each do |job| %>
+      <% if job.salary != "-" || job.salary.nil? %>
+        <% salary = job.salary.gsub(/,/, "").gsub(/\D+/, " ").strip.to_i %>
+        <% if job.salary_format == true %>
+          <% array_se = job.salary.split("-") %>
+          <% se = array_se.map { |e| e.gsub(/,/, "").gsub(/\D+/, " ").strip.to_i } %>
+          <% salary = se.sum / se.length %>
+          <% array_of_salary << salary %>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-  <% if array_of_salary.count != 0 %>
-    <% avg_salary = (array_of_salary.sum / array_of_salary.count).to_s %>
-  <% end %>
-  <% if avg_salary.to_s.length > 3 %>
-    <% chars = avg_salary.chars %>
-    <% array_avg_salary_chars = (chars[(-chars.length..-4)].push(".")).concat(chars[(-3..-1)]) %>
-    <% avg_salary = array_avg_salary_chars.join("") %>
-  <% end %>
-
-  <div class="container">
-    <div class="overall-info">
-      <div class="search_keyword">
-        <h5>You searched for: <%= @search.title %></h5>
+    <% if array_of_salary.count != 0 %>
+      <% avg_salary = (array_of_salary.sum / array_of_salary.count).to_s %>
+    <% end %>
+    <% if avg_salary.to_s.length > 3 %>
+      <% chars = avg_salary.chars %>
+      <% array_avg_salary_chars = (chars[(-chars.length..-4)].push(".")).concat(chars[(-3..-1)]) %>
+      <% avg_salary = array_avg_salary_chars.join("") %>
+    <% end %>
+    <div class="container">
+      <div class="overall-info">
+        <div class="search_keyword">
+          <h5>You searched for: <%= @search.title %></h5>
+        </div>
+        <div class="average-salary">
+          <h5>
+            Average Salary of displayed: <%= avg_salary %>
+          </h5>
+        </div>
+        <div class="results">
+          <h5>
+            Nr of Results: <%= @jobs.length %>
+          </h5>
+        </div>
       </div>
-      <div class="average-salary">
-        <h5>
-          Average Salary of displayed: <%= avg_salary %>
-        </h5>
-      </div>
-      <div class="results">
-        <h5>
-          Nr of Results: <%= @jobs.length %>
-        </h5>
-      </div>
+      <%= render "jobs", remote: true %>
     </div>
-    <%= render "jobs", remote: true %>
-  </div>
+  <% end %>
 <% end %>
-

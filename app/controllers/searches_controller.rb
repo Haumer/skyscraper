@@ -29,10 +29,10 @@ class SearchesController < ApplicationController
     @search = Search.new(search_params)
     @search.user = current_user
     @search.pages = Admin.all.first.pages
+    @search.save
+    p "this search id is: #{@search.id}"
     if @search.save
-      @search.save
       PreRunAllJob.perform_later(@search.title, @search.id)
-      # ScrapeJob.perform_later(@search.title, @search.id)
       redirect_to search_path(@search)
     else
       render :new

@@ -1,7 +1,7 @@
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'Search-History')">Search History</button>
-  <button class="tablinks" onclick="openCity(event, 'Top-Jobs')">Top-Jobs</button>
-  <button class="tablinks" onclick="openCity(event, 'Suggestions')">Suggestions</button>
+<div class="tab" id="myTab">
+  <a class="tablinks" onclick="openCity(event, 'Search-History')" data-toggle="tab">Search History</a>
+  <a class="tablinks" onclick="openCity(event, 'Top-Jobs')" data-toggle="tab">Top-Jobs</a>
+  <a class="tablinks" onclick="openCity(event, 'Suggestions')" data-toggle="tab">Suggestions</a>
 </div>
 
 <div id="Search-History" class="tabcontent text-center">
@@ -43,18 +43,20 @@
 
 </div>
 
-<script>
-function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-</script>
+<%= content_for :after_js do %>
+  <script>
+  function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+  }
+  </script>
+<% end %>

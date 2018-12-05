@@ -2,7 +2,7 @@
 
 <div class="container">
   <% @searches_ordered.each do |search| %>
-    <% if search.job.count == 0 %>
+    <% if search.jobs.count == 0 %>
     <% else %>
       <div class="col-xs-6 col-sm-4">
         <div class="searches-card">
@@ -13,7 +13,7 @@
                   <b>Search: </b> <%= search.title.capitalize %>
                 </div>
                 <div>
-                  <b>Nr° of Results: </b> <%= search.job.count %>
+                  <b>Nr° of Results: </b> <%= search.jobs.count %>
                 </div>
                 <div>
                   <% date_array = search.created_at.to_s.split.first.split("-") %>

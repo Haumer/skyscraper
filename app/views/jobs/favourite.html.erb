@@ -1,49 +1,51 @@
 <div class="container">
     <div class="all-cards">
       <% @jobs.each do |job| %>
-        <div class="col-xs-12 col-sm-6">
-          <div class="card">
-            <div>
-              Job Title: <%= job.title %>
-            </div>
-            <div>
-              Company: <%= job.company %>
-            </div>
-            <div>
-              <% if job.salary.include?("k") %>
-                Salary: <%= job.salary %>
-              <% else %>
-                Salary: <%= job.salary %>
-              <% end %>
-            </div>
-            <div>
-              Location: <%= job.location %>
-            </div>
-            <div>
-              Link:
-              <%= link_to job.link do %>
-                <%= job.website %>
-              <% end %>
-            </div>
-            <div>
-              Search Term:
-              <%= job.search.title.capitalize %>
-            </div>
-            <div class="job-star">
-              <% if current_user.liked? job %>
-                <%= link_to dislike_job_path(job), class: "dislike", method: :put do %>
-                  <i class="fas fa-star"></i>
-                  <% job.get_upvotes.size %>
+        <% if job.search.user_id == current_user %>
+          <div class="col-xs-12 col-sm-6">
+            <div class="card">
+              <div>
+                Job Title: <%= job.title %>
+              </div>
+              <div>
+                Company: <%= job.company %>
+              </div>
+              <div>
+                <% if job.salary.include?("k") %>
+                  Salary: <%= job.salary %>
+                <% else %>
+                  Salary: <%= job.salary %>
                 <% end %>
-              <% else %>
-                <%= link_to like_job_path(job), class: "like", method: :put do %>
-                  <i class="far fa-star"></i>
-                  <% job.get_upvotes.size %>
+              </div>
+              <div>
+                Location: <%= job.location %>
+              </div>
+              <div>
+                Link:
+                <%= link_to job.link do %>
+                  <%= job.website %>
                 <% end %>
-              <% end %>
+              </div>
+              <div>
+                Search Term:
+                <%= job.search.title.capitalize %>
+              </div>
+              <div class="job-star">
+                <% if current_user.liked? job %>
+                  <%= link_to dislike_job_path(job), class: "dislike", method: :put do %>
+                    <i class="fas fa-star"></i>
+                    <% job.get_upvotes.size %>
+                  <% end %>
+                <% else %>
+                  <%= link_to like_job_path(job), class: "like", method: :put do %>
+                    <i class="far fa-star"></i>
+                    <% job.get_upvotes.size %>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     <div>
  </div>
