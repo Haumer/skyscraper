@@ -6,7 +6,7 @@
           <%= link_to job_path(job) do %>
             <div class="card">
               <div>
-                <% if job.title.length > 35 %>
+                <% if job.title.length > 32 %>
                 <% job_title_chars_array = [] %>
                    <span> <b> Job Title: </b> <%= job_title_chars_array.concat(job.title.chars[(0..32)]).join.capitalize + "..." %></span>
                 <% else %>
