@@ -14,7 +14,7 @@
                 <% end %>
               </div>
               <div>
-                <% if job.company.length > 35 %>
+                <% if job.company.length > 32 %>
                 <% job_company_chars_array = [] %>
                   <span> <b>Company: </b> <%= job_company_chars_array.concat(job.company.chars[(0..32)]).join + "..." %></span>
                 <% else %>
@@ -22,7 +22,7 @@
                 <% end %>
               </div>
               <div>
-                <% if job.salary.length > 35 %>
+                <% if job.salary.length > 32 %>
                 <% job_salary_chars_array = [] %>
                   <span> <b>Salary: </b> <%= job_salary_chars_array.concat(job.salary.chars[(0..32)]).join + "..." %></span>
                 <% else %>
@@ -30,7 +30,7 @@
                 <% end %>
               </div>
               <div>
-                <% if job.location.length > 35 %>
+                <% if job.location.length > 32 %>
                 <% job_location_chars_array = [] %>
                   <span><b>Location:</b> <%= job_location_chars_array.concat(job.location.chars[(0..32)]).join + "..." %></span>
                 <% else %>
