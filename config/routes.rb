@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :scrapers
   resources :searches do
     collection do
+      get "common", to: "searches#common"
       get "stats", to: "searches#stats"
       get "dashboard", to: "searches#dashboard"
     end

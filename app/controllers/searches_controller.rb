@@ -68,10 +68,10 @@ class SearchesController < ApplicationController
   end
 
   def common
-    ruby = Search.where(title: "ruby").last
-    javascript = Seach.where(title: "javascript").last
-    developer = Search.where(title: "developer").last
-    rails = Search.where(title: "rails")
+    @ruby = Search.where(title: "ruby").last
+    @javascript = Search.where(title: "javascript").last
+    @developer = Search.where(title: "developer").last
+    @rails = Search.where(title: "rails")
   end
 
   private
