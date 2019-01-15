@@ -67,6 +67,13 @@ class SearchesController < ApplicationController
     @total = hash.sort_by { |_k, v| v.to_i }.reverse
   end
 
+  def common
+    ruby = Search.where(title: "ruby").last
+    javascript = Seach.where(title: "javascript").last
+    developer = Search.where(title: "developer").last
+    rails = Search.where(title: "rails")
+  end
+
   private
 
   def search_params
