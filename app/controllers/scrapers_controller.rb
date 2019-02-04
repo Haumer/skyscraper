@@ -8,7 +8,12 @@ class ScrapersController < ApplicationController
 
   def show
     @scraper = Scraper.find(params[:id])
-    scrape!(@scraper.keyword)
+    if Scraper.all.map{ |e| e.keyword }.include?(@scraper.keyword)
+      # redirect_to scraper_path(@scraper)
+      Scraper.where(keyword: @scraper.keyword).sort_by { |e| e.created_at }.first
+    else
+      scrape!(@scraper.keyword)
+    end
   end
 
   def scrape!(keyword)
@@ -40,8 +45,12 @@ class ScrapersController < ApplicationController
   def create
     @scraper = Scraper.new(scraper_params)
     @scraper.save
-    scrape!(@scraper.keyword)
-    redirect_to scraper_path(@scraper)
+    unless Scraper.all.map{ |e| e.keyword }.include?(@scraper.keyword)
+      scrape!(@scraper.keyword)
+      redirect_to scraper_path(@scraper)
+    else
+      Scraper.where(keyword: @scraper.keyword)sort_by { |e| e.created_at }.first
+    end
   end
 
   private
