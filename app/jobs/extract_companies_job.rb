@@ -3,6 +3,7 @@ class ExtractCompaniesJob < ApplicationJob
 
   def perform(*args)
     Job.all.each do |job|
+      next if job.id == 18698
       if Firm.where(firm_name: job.company.capitalize).count == 0
         p job.title
         @firm = Firm.create!(firm_name: job.company.capitalize)

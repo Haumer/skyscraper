@@ -1,0 +1,26 @@
+<div class="container">
+  <% @firms.each do |firm| %>
+    <% if firm.jobs.count == 0 %>
+    <% else %>
+      <div class="col-xs-6 col-sm-6">
+        <div class="searches-card">
+          <div class="all-cards">
+            <%= link_to firm_path(firm) do %>
+              <div class="card">
+                <div>
+                  <b>firm: </b> <%= firm.firm_name.capitalize %>
+                </div>
+                <div>
+                  <b>Nr° of Jobs: </b> <%= firm.jobs.count %>
+                </div>
+                <div>
+                  <% date_array = firm.created_at.to_s.split.first.split("-") %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
