@@ -10,7 +10,14 @@ class SearchesController < ApplicationController
   def show
     @search = Search.find(params[:id])
     @jobs = Job.where(search_id: @search.id).order(quality: :desc)
-    respond_to :html, :js
+    if Search.all.map { |e| e.title }.include?(@search.title)
+      @old_search = Search.where(title: @search.title).last
+      @jobs = Job.where(search_id: @old_search.id).order(quality: :desc)
+      respond_to :html, :js
+    else
+      @jobs = Job.where(search_id: @search.id).order(quality: :desc)
+      respond_to :html, :js
+    end
   end
 
   def new
@@ -26,16 +33,19 @@ class SearchesController < ApplicationController
   end
 
   def create
-    @search = Search.new(search_params)
-    @search.user = current_user
-    @search.pages = Admin.all.first.pages
-    if @search.save
-      @search.save
-      PreRunAllJob.perform_later(@search.title, @search.id)
-      # ScrapeJob.perform_later(@search.title, @search.id)
+    if Search.all.map { |e| e.title }.include?(search_params[:title])
+      @search = Search.where(title: search_params[:title]).last
       redirect_to search_path(@search)
     else
-      render :new
+      @search = Search.new(search_params)
+      @search.user = current_user
+      @search.pages = Admin.all.first.pages
+      if @search.save
+        PreRunAllJob.perform_later(@search.title, @search.id)
+        redirect_to search_path(@search)
+      else
+        render :new
+      end
     end
   end
 
