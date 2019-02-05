@@ -10,14 +10,14 @@ class SearchesController < ApplicationController
   def show
     @search = Search.find(params[:id])
     @jobs = Job.where(search_id: @search.id).order(quality: :desc)
-    if Search.all.map { |e| e.title }.include?(@search.title)
-      @old_search = Search.where(title: @search.title).last
-      @jobs = Job.where(search_id: @old_search.id).order(quality: :desc)
-      respond_to :html, :js
-    else
-      @jobs = Job.where(search_id: @search.id).order(quality: :desc)
-      respond_to :html, :js
-    end
+    # if Search.all.map { |e| e.title }.include?(@search.title)
+    #   @old_search = Search.where(title: @search.title).last
+    #   @jobs = Job.where(search_id: @old_search.id).order(quality: :desc)
+    #   respond_to :html, :js
+    # else
+    #   @jobs = Job.where(search_id: @search.id).order(quality: :desc)
+    #   respond_to :html, :js
+    # end
   end
 
   def new

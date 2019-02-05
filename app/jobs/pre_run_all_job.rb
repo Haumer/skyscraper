@@ -19,6 +19,7 @@ class PreRunAllJob < ApplicationJob
     # @id = @search.id
     # @search.save
     search_id = id
+    firm_id = 18698
     @id = id
     search_term = title.downcase
     search_location = "london"
@@ -69,7 +70,8 @@ class PreRunAllJob < ApplicationJob
                 salary: salary,
                 company: company,
                 link: link,
-                search_id: search_id
+                search_id: search_id,
+                firm_id: firm_id
               )
             end
           end
@@ -102,7 +104,8 @@ class PreRunAllJob < ApplicationJob
                   salary: salary,
                   company: company,
                   link: link,
-                  search_id: search_id
+                  search_id: search_id,
+                  firm_id: firm_id
                 )
               end
             end
@@ -124,7 +127,8 @@ class PreRunAllJob < ApplicationJob
                   salary: salary,
                   company: company,
                   link: link,
-                  search_id: search_id
+                  search_id: search_id,
+                  firm_id: firm_id
                 )
               end
             end
@@ -155,7 +159,8 @@ class PreRunAllJob < ApplicationJob
               salary: salary,
               company: company,
               link: link,
-              search_id: search_id
+              search_id: search_id,
+              firm_id: firm_id
             )
           end
           p "escape the city"
@@ -185,7 +190,8 @@ class PreRunAllJob < ApplicationJob
                 salary: salary,
                 company: company,
                 link: link,
-                search_id: search_id
+                search_id: search_id,
+                firm_id: firm_id
               )
             end
           end
@@ -218,7 +224,8 @@ class PreRunAllJob < ApplicationJob
                 salary: salary,
                 company: company,
                 link: link,
-                search_id: search_id
+                search_id: search_id,
+                firm_id: firm_id
               )
             end
           end
@@ -249,7 +256,8 @@ class PreRunAllJob < ApplicationJob
                 salary: salary,
                 company: company,
                 link: link,
-                search_id: search_id
+                search_id: search_id,
+                firm_id: firm_id
               )
             end
           end
@@ -279,7 +287,8 @@ class PreRunAllJob < ApplicationJob
                 salary: salary,
                 company: company,
                 link: link,
-                search_id: search_id
+                search_id: search_id,
+                firm_id: firm_id
               )
             end
           end
@@ -309,7 +318,8 @@ class PreRunAllJob < ApplicationJob
                 salary: salary,
                 company: company,
                 link: link,
-                search_id: search_id
+                search_id: search_id,
+                firm_id: firm_id
               )
             end
           end
