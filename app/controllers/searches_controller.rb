@@ -33,8 +33,8 @@ class SearchesController < ApplicationController
   end
 
   def create
-    if Search.all.map { |e| e.title }.include?(search_params[:title]) && (Search.where(title: search_params[:title]).last.created_at) > (DateTime.now - 180.minutes)
-      @search = Search.where(title: search_params[:title]).last
+    if Search.all.map { |e| e.title }.include?(search_params[:title].strip) && (Search.where(title: search_params[:title].strip).last.created_at) > (DateTime.now - 180.minutes)
+      @search = Search.where(title: search_params[:title].strip).last
       redirect_to search_path(@search)
     else
       @search = Search.new(search_params)

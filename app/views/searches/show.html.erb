@@ -1,5 +1,7 @@
 <% if @jobs.length == 0 %>
-  Loading your jobs!
+  <div class="loading">
+      Loading your jobs!
+  </div>
 <% else %>
   <% array_of_salary = []%>
   <% @jobs.each do |job| %>
