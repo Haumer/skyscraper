@@ -1,0 +1,26 @@
+<div class="container">
+  <% @websites.each do |website| %>
+    <% if website.jobs.count == 0 %>
+    <% else %>
+      <div class="col-xs-6 col-sm-6">
+        <div class="searches-card">
+          <div class="all-cards">
+            <%= link_to website_path(website) do %>
+              <div class="card">
+                <div>
+                  <b>website: </b> <%= website.website_name %>
+                </div>
+                <div>
+                  <b>Nr° of Jobs: </b> <%= website.jobs.count %>
+                </div>
+                <div>
+                  <% date_array = website.created_at.to_s.split.first.split("-") %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

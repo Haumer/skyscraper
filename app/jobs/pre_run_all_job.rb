@@ -19,7 +19,7 @@ class PreRunAllJob < ApplicationJob
     # @id = @search.id
     # @search.save
     search_id = id
-    firm_id = 18698
+    firm_id = 1
     @id = id
     search_term = title.downcase
     search_location = "london"
@@ -66,12 +66,13 @@ class PreRunAllJob < ApplicationJob
               Job.create(
                 title: title,
                 location: location,
-                website: website,
+                job_website: website,
                 salary: salary,
                 company: company,
                 link: link,
                 search_id: search_id,
-                firm_id: firm_id
+                firm_id: firm_id,
+                website_id: Website.where(website_name: website).first.id
               )
             end
           end
@@ -100,7 +101,7 @@ class PreRunAllJob < ApplicationJob
                 Job.create(
                   title: title,
                   location: location,
-                  website: website,
+                  job_website: website,
                   salary: salary,
                   company: company,
                   link: link,
@@ -123,7 +124,7 @@ class PreRunAllJob < ApplicationJob
                 Job.create(
                   title: title,
                   location: location,
-                  website: website,
+                  job_website: website,
                   salary: salary,
                   company: company,
                   link: link,
@@ -155,7 +156,7 @@ class PreRunAllJob < ApplicationJob
             Job.create(
               title: title,
               location: location,
-              website: website,
+              job_website: website,
               salary: salary,
               company: company,
               link: link,
@@ -186,7 +187,7 @@ class PreRunAllJob < ApplicationJob
               Job.create(
                 title: title,
                 location: location,
-                website: website,
+                job_website: website,
                 salary: salary,
                 company: company,
                 link: link,
@@ -220,7 +221,7 @@ class PreRunAllJob < ApplicationJob
               Job.create(
                 title: title,
                 location: location,
-                website: website,
+                job_website: website,
                 salary: salary,
                 company: company,
                 link: link,
@@ -252,7 +253,7 @@ class PreRunAllJob < ApplicationJob
               Job.create(
                 title: title,
                 location: location,
-                website: website,
+                job_website: website,
                 salary: salary,
                 company: company,
                 link: link,
@@ -283,7 +284,7 @@ class PreRunAllJob < ApplicationJob
               Job.create(
                 title: title,
                 location: location,
-                website: website,
+                job_website: website,
                 salary: salary,
                 company: company,
                 link: link,
@@ -314,7 +315,7 @@ class PreRunAllJob < ApplicationJob
               Job.create(
                 title: title,
                 location: location,
-                website: website,
+                job_website: website,
                 salary: salary,
                 company: company,
                 link: link,
@@ -353,7 +354,7 @@ class PreRunAllJob < ApplicationJob
         #   Job.create(
         #     title: title,
         #     location: location,
-        #     website: website,
+        #     job_website: website,
         #     salary: salary,
         #     company: company,
         #     link: link,

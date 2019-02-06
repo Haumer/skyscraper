@@ -3,16 +3,24 @@ class ExtractCompaniesJob < ApplicationJob
 
   def perform(*args)
     Job.all.each do |job|
-      next if job.id == 18698
-      if Firm.where(firm_name: job.company.capitalize).count == 0
-        p job.title
-        @firm = Firm.create!(firm_name: job.company.capitalize)
+      if job.company.downcase.include?(" ltd") || job.company.downcase.include?(" ltd.")
+        job.company = job.company.downcase.strip.chomp(" ltd").chomp(" ltd.")
+        p job.company
+        job.save
+      end
+      if job.company.last == " "
+        job.company = job.company[0..-2].capitalize
+        job.save
+      end
+      if Firm.where(firm_name: job.company).count == 0
+        p job.company
+        @firm = Firm.create!(firm_name: job.company)
         job.firm_id = @firm.id
         job.save
         @firm.save
       else
-        p job.title
-        @firm = Firm.where(firm_name: job.company.capitalize).first
+        p job.company
+        @firm = Firm.where(firm_name: job.company).first
         job.firm_id = @firm.id
         job.save
         @firm.save

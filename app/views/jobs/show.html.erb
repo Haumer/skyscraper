@@ -23,13 +23,13 @@
 
       <% if @job.link.include?("https://") %>
         <%= link_to @job.link do %>
-          <%= @job.website %>
+          <%= @job.job_website %>
         <% end %>
       <% else %>
         <% @job.link = "https://" + @job.link %>
         <% @job.save %>
         <%= link_to @job.link do %>
-          <%= @job.website %>
+          <%= @job.job_website %>
         <% end %>
       <% end %>
         <%#= link_to @job.link, "https://#{@job.website}" %>
@@ -63,7 +63,7 @@
             <div>
               Link:
               <%= link_to element.link do %>
-                <%= element.website %>
+                <%= element.job_website %>
               <% end %>
               <%#= link_to filtered.link, "http://#{filtered.website}" %>
             </div>
