@@ -63,7 +63,7 @@ class SearchesController < ApplicationController
 
     # count number of mentions of website and sort
     hash = {}
-    web = Job.all.map { |e| e.website.strip unless e.website.nil? }
+    web = Job.all.map { |e| e.job_website.strip unless e.website.nil? }
     web2 = web.group_by(&:itself).map { |k, v| hash[k] = v.count }
     @websites = hash.sort_by { |_k, v| v.to_i }
   end

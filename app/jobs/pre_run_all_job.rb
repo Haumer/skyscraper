@@ -346,7 +346,6 @@ class PreRunAllJob < ApplicationJob
         begin
         rescue
           rescued[:cwjobs] == true
-        end
 
 
         # if @cwjobs_counter == 1
@@ -369,10 +368,11 @@ class PreRunAllJob < ApplicationJob
         #     company: company,
         #     link: link,
         #     search_id: search_id,
-        # website_id: Website.where(website_name: website).first.id
+        #     website_id: Website.where(website_name: website).first.id
         #   )
         # end
         # @cwjobs_counter += 1
+        end
       end
     end
 

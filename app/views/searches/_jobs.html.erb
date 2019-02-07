@@ -4,7 +4,7 @@
       <div class="col-xs-12 col-sm-4">
         <div class="all-cards">
           <%= link_to job_path(job) do %>
-            <div class="card">
+            <div class="card" style="border-color: <%= job.website.website_color %>;">
               <div>
                 <% if job.title.length > 32 %>
                 <% job_title_chars_array = [] %>

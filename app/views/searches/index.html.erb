@@ -17,7 +17,7 @@
                 </div>
                 <div>
                   <% date_array = search.created_at.to_s.split.first.split("-") %>
-                  <b>Date: </b> <%= Date.new(date_array[0].to_i, date_array[1].to_i, date_array[2].to_i).strftime('%e %b %Y') %>
+                  <b>Date: </b> <%= Date.new(date_array[0].to_i, date_array[1].to_i, date_array[2].to_i).strftime('%e %b %Y') %> <span>( <%= distance_of_time_in_words(search.created_at, Time.now) %> ago )</span>
                 </div>
               </div>
             <% end %>
