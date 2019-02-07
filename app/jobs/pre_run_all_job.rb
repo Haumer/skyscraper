@@ -22,6 +22,9 @@ class PreRunAllJob < ApplicationJob
     firm_id = 1
     @id = id
     search_term = title.downcase
+    if search_term.strip.split.count > 1
+      search_term = search_term.strip.split.join("%20")
+    end
     search_location = "london"
 
     @indeed_counter = 0
@@ -86,7 +89,6 @@ class PreRunAllJob < ApplicationJob
 
       if rescued[:jobsite] == false
         begin
-
           if @jobsite_counter.zero?
             results = []
             page = Nokogiri::HTML(open("https://www.jobsite.co.uk/jobs/#{search_term}/in-#{search_location}?radius=20"))
@@ -106,7 +108,8 @@ class PreRunAllJob < ApplicationJob
                   company: company,
                   link: link,
                   search_id: search_id,
-                  firm_id: firm_id
+                  firm_id: firm_id,
+                  website_id: Website.where(website_name: website).first.id
                 )
               end
             end
@@ -129,7 +132,8 @@ class PreRunAllJob < ApplicationJob
                   company: company,
                   link: link,
                   search_id: search_id,
-                  firm_id: firm_id
+                  firm_id: firm_id,
+                  website_id: Website.where(website_name: website).first.id
                 )
               end
             end
@@ -161,7 +165,8 @@ class PreRunAllJob < ApplicationJob
               company: company,
               link: link,
               search_id: search_id,
-              firm_id: firm_id
+              firm_id: firm_id,
+              website_id: Website.where(website_name: website).first.id
             )
           end
           p "escape the city"
@@ -192,7 +197,8 @@ class PreRunAllJob < ApplicationJob
                 company: company,
                 link: link,
                 search_id: search_id,
-                firm_id: firm_id
+                firm_id: firm_id,
+                website_id: Website.where(website_name: website).first.id
               )
             end
           end
@@ -226,7 +232,8 @@ class PreRunAllJob < ApplicationJob
                 company: company,
                 link: link,
                 search_id: search_id,
-                firm_id: firm_id
+                firm_id: firm_id,
+                website_id: Website.where(website_name: website).first.id
               )
             end
           end
@@ -258,7 +265,8 @@ class PreRunAllJob < ApplicationJob
                 company: company,
                 link: link,
                 search_id: search_id,
-                firm_id: firm_id
+                firm_id: firm_id,
+                website_id: Website.where(website_name: website).first.id
               )
             end
           end
@@ -289,7 +297,8 @@ class PreRunAllJob < ApplicationJob
                 company: company,
                 link: link,
                 search_id: search_id,
-                firm_id: firm_id
+                firm_id: firm_id,
+                website_id: Website.where(website_name: website).first.id
               )
             end
           end
@@ -320,7 +329,8 @@ class PreRunAllJob < ApplicationJob
                 company: company,
                 link: link,
                 search_id: search_id,
-                firm_id: firm_id
+                firm_id: firm_id,
+                website_id: Website.where(website_name: website).first.id
               )
             end
           end
@@ -358,7 +368,8 @@ class PreRunAllJob < ApplicationJob
         #     salary: salary,
         #     company: company,
         #     link: link,
-        #     search_id: search_id
+        #     search_id: search_id,
+        # website_id: Website.where(website_name: website).first.id
         #   )
         # end
         # @cwjobs_counter += 1

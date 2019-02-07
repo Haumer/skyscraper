@@ -1,6 +1,7 @@
 class FirmsController < ApplicationController
   def index
     @firms = Firm.all.sort_by { |firm| firm.jobs.count }.reverse
+    ExtractCompaniesJob.perform_later
   end
 
   def show
