@@ -36,11 +36,13 @@
 </div>
 
 <div id="All-Companies" class="tabcontent">
-  <% @companys.each do |company| %>
-    <div class="col-sm-4">
-      <%= company %>
-    </div>
-  <% end %>
+  <%= line_chart User.group_by_day(:created_at).count %>
+  <%= column_chart User.group_by_day(:created_at).count %>
+  <%= timeline [
+  ["Washington", "1789-04-29", "1797-03-03"],
+  ["Adams", "1797-03-03", "1801-03-03"],
+  ["Jefferson", "1801-03-03", "1809-03-03"]
+] %>
 </div>
 
 <script>

@@ -1,6 +1,10 @@
 source 'https://rubygems.org'
 ruby '2.5.1'
 
+gem 'groupdate'
+gem 'fusioncharts-rails'
+gem 'chartkick'
+gem 'highcharts-rails'
 gem 'acts_as_votable', '~> 0.11.1'
 gem 'jquery-rails'
 gem 'sidekiq'
