@@ -49,7 +49,7 @@ class ScrapersController < ApplicationController
       scrape!(@scraper.keyword)
       redirect_to scraper_path(@scraper)
     else
-      Scraper.where(keyword: @scraper.keyword)sort_by { |e| e.created_at }.first
+      Scraper.where(keyword: @scraper.keyword).sort_by { |e| e.created_at }.first
     end
   end
 
