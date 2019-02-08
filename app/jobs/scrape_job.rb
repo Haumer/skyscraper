@@ -1,6 +1,3 @@
-# require "nokogiri"
-# require "open-uri"
-
 class ScrapeJob < ApplicationJob
   queue_as :default
 
