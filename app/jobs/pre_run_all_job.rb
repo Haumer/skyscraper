@@ -1,4 +1,4 @@
-# require "open-uri"
+require "open-uri"
 
 class PreRunAllJob < ApplicationJob
   queue_as :default
