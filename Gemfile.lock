@@ -224,6 +224,7 @@ DEPENDENCIES
   chartkick
   devise
   dotenv-rails
+  ffi
   font-awesome-sass (~> 5.0.9)
   fusioncharts-rails
   groupdate

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.5.1'
 
+gem 'ffi'
 gem 'groupdate'
 gem 'fusioncharts-rails'
 gem 'chartkick'
