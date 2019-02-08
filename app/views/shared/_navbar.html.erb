@@ -10,7 +10,7 @@
     <% if user_signed_in? %>
 
       <!-- Links when logged in -->
-      <% unless current_user.admin.false? %>
+      <% if current_user.admin == true %>
         <%= link_to "Admin Panel", edit_admin_path(Admin.all.first), class: "navbar-wagon-link navbar-wagon-item" %>
       <% end %>
       <%= link_to "My Recent Searches", searches_path, class: "navbar-wagon-item navbar-wagon-link" %>
