@@ -1,5 +1,5 @@
-require 'Nokogiri'
-require 'open-uri'
+# require 'Nokogiri'
+# require 'open-uri'
 
 class SearchesController < ApplicationController
   def index
