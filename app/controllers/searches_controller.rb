@@ -38,6 +38,7 @@ class SearchesController < ApplicationController
       redirect_to search_path(@search)
       @new_search = @search.clone
       @new_search.user_id = current_user.id
+      @new_search.save!
     else
       @search = Search.new(search_params)
       @search.user = current_user
