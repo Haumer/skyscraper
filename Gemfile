@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.5.1'
 
+gem 'nokogiri'
 gem 'ffi'
 gem 'groupdate'
 gem 'fusioncharts-rails'
@@ -25,7 +26,6 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
-gem 'nokogiri'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
