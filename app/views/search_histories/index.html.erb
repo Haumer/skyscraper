@@ -1,6 +1,6 @@
 <div class="container">
   <% @search_histories_ordered.each do |search_history| %>
-    <% unless search_history.search.job.count == 0 %>
+    <% unless search_history.search.jobs.count == 0 %>
       <div class="col-xs-6 col-sm-4">
         <div class="searches-card">
           <div class="all-cards">
@@ -10,7 +10,7 @@
                   <b>Search: </b> <%= search_history.search.title.capitalize %>
                 </div>
                 <div>
-                  <b>Nr° of Results: </b> <%= search_history.search.job.count %>
+                  <b>Nr° of Results: </b> <%= search_history.search.jobs.count %>
                 </div>
                 <div>
                   <% date_array = search_history.created_at.to_s.split.first.split("-") %>

@@ -5,6 +5,6 @@ class WebsitesController < ApplicationController
 
   def show
     @website = Website.find(params[:id])
-    @jobs = @website.jobs
+    @jobs = @website.jobs.order(quality: :desc)
   end
 end
