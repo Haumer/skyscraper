@@ -1,7 +1,7 @@
 <h3>Enter a Programming Language</h3>
 <div class="form-container">
   <div class="col-sm-4 offset-sm-4">
-    <div class="form-inline">
+    <div class="form-inline text-center">
       <%= simple_form_for @search do |f| %>
         <%= f.input :title, :label => 'Look for ', :input_html => { :class => 'search-new-title', :placeholder => "e.g. ruby"}%>
         <%= f.button :submit, "Scrape!"%>
