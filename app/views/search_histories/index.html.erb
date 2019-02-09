@@ -1,0 +1,26 @@
+<div class="container">
+  <% @search_histories_ordered.each do |search_history| %>
+    <% unless search_history.search.job.count == 0 %>
+      <div class="col-xs-6 col-sm-4">
+        <div class="searches-card">
+          <div class="all-cards">
+            <%= link_to search_path(search_history) do %>
+              <div class="card">
+                <div>
+                  <b>Search: </b> <%= search_history.search.title.capitalize %>
+                </div>
+                <div>
+                  <b>Nr° of Results: </b> <%= search_history.search.job.count %>
+                </div>
+                <div>
+                  <% date_array = search_history.created_at.to_s.split.first.split("-") %>
+                  <b>Date: </b> <%= Date.new(date_array[0].to_i, date_array[1].to_i, date_array[2].to_i).strftime('%e %b %Y') %> <span>( <%= distance_of_time_in_words(search_history.created_at, Time.now) %> ago )</span>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -5,14 +5,14 @@
 </div>
 
 <div id="Search-History" class="tabcontent text-center">
-  <% @searches.each do |search| %>
+  <% @search_histories.each do |search_history| %>
     <div class="col-xs-4">
       <div class="card">
-        <%= link_to search_path(search) do %>
-          <%= search.title %>
-          <%= search.location %>
-          <%= search.created_at %>
-          <%= search.source %>
+        <%= link_to search_path(search_history) do %>
+          <%= search_history.search.title %>
+          <%= search_history.search.location %>
+          <%= search_history.search.created_at %>
+          <%= search_history.search.source %>
         <% end %>
       </div>
     </div>

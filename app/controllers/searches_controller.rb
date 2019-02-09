@@ -36,11 +36,8 @@ class SearchesController < ApplicationController
     if Search.all.map { |e| e.title }.include?(search_params[:title].strip) && (Search.where(title: search_params[:title].strip).last.created_at) > (DateTime.now - 180.minutes)
       @search = Search.where(title: search_params[:title].strip).last
       redirect_to search_path(@search)
-      @new_search = @search.clone
-      binding.pry
-      @new_search.user_id = current_user.id
-      @new_search.save!
-      binding.pry
+      @search_history = SearchHistory.create(search_id: @search.id, user_id: current_user.id)
+      @search_history.save
     else
       @search = Search.new(search_params)
       @search.user = current_user
@@ -48,6 +45,8 @@ class SearchesController < ApplicationController
       if @search.save
         PreRunAllJob.perform_later(@search.title, @search.id)
         redirect_to search_path(@search)
+        @search_history = SearchHistory.create(search_id: @search.id, user_id: current_user.id)
+        @search_history.save
       else
         render :new
       end
@@ -76,6 +75,9 @@ class SearchesController < ApplicationController
   def dashboard
     @array = []
     hash = {}
+    @search_histories = SearchHistory.where(user_id: current_user.id)
+    @search_histories_ordered = @search_histories.order(created_at: :desc)
+
     @searches = Search.all.where(user_id: current_user.id).order(created_at: :desc)
     @searches.each { |search| @array << search.title }
     @title_freq = @array.group_by(&:itself).map { |k, v| hash[k] = v.count }
