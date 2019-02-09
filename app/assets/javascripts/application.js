@@ -1,4 +1,4 @@
 //= require rails-ujs
-//= require highcharts
+//= require highcharts.js
 //= require chartkick
 //= require_tree .
