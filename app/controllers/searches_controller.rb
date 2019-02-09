@@ -37,8 +37,10 @@ class SearchesController < ApplicationController
       @search = Search.where(title: search_params[:title].strip).last
       redirect_to search_path(@search)
       @new_search = @search.clone
+      binding.pry
       @new_search.user_id = current_user.id
       @new_search.save!
+      binding.pry
     else
       @search = Search.new(search_params)
       @search.user = current_user
