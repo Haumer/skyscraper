@@ -386,6 +386,8 @@ class PreRunAllJob < ApplicationJob
     puts "I updated the quality"
     SingleRemoveDuplicatesJob.perform_later(@id)
     puts "I have removed duplicates"
+    ExtractCompaniesJob.perform_later
+    puts "I have extracted Firms"
 
     # Do something later
     # @search.save
