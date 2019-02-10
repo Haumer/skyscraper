@@ -36,14 +36,10 @@
 </div>
 
 <div id="All-Companies" class="tabcontent">
-  <%= line_chart User.group_by_day(:created_at).count %>
-  <%= column_chart User.group_by_day(:created_at).count %>
-  <%= timeline [
-  ["Washington", "1789-04-29", "1797-03-03"],
-  ["Adams", "1797-03-03", "1801-03-03"],
-  ["Jefferson", "1801-03-03", "1809-03-03"]
-] %>
+  <%= line_chart Search.group_by_day(:created_at).count %>
 </div>
+<script src="/path/to/Chart.bundle.js"></script>
+<script src="chartkick.js"></script>
 
 <script>
 function openCity(evt, cityName) {
