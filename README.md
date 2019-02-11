@@ -1,4 +1,4 @@
-This is a simple website intended to aid your jobsearch.
+This is a simple website intended to aid your job search.
 You can scrape a keyword and you will receive all the relevant information for
 position linked to your keyword form multiple job boards.
 
