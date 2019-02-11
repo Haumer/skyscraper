@@ -10,7 +10,6 @@
 <div id="Overall" class="tabcontent text-center">
   <%= line_chart Search.group_by_day(:created_at).count, xtitle: "Days", ytitle: "Searches" %>
   <%= line_chart Job.group_by_day(:created_at).count, xtitle: "Days", ytitle: "Jobs Scraped" %>
-  <%= line_chart Website.group(:jobs).count %>
 </div>
 
 <div id="Recruiters" class="tabcontent">
@@ -18,9 +17,6 @@
 </div>
 
 <div id="All-Companies" class="tabcontent">
-  <%= line_chart @firms.map { |firm|
-    {name: firm.firm_name, data: firm.gr.count }
-}.first(10)  %>
 </div>
 
 <script>
