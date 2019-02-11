@@ -221,7 +221,7 @@ DEPENDENCIES
   acts_as_votable (~> 0.11.1)
   autoprefixer-rails
   bootstrap-sass (~> 3.3)
-  chartkick (~> 3.0, >= 3.0.1)
+  chartkick
   devise
   dotenv-rails
   ffi

@@ -1,6 +1,18 @@
 class JobsController < ApplicationController
+  after_create_commit :log_job_saved_to_db
+  after_update_commit :log_job_saved_to_db
+
   def index
 
+  end
+
+  def create
+    @search_room = SearchRoom.find(params[:id])
+    if Job.create!
+      ActionCable.server.broadcast("search_room_#{@search_room.id}", {
+        search: @search.to_json
+      })
+    end
   end
 
   def show
@@ -23,5 +35,12 @@ class JobsController < ApplicationController
 
   def favourite
     @jobs = Job.all.order(:cached_votes_score => :desc).where(cached_votes_up: 1)
+  end
+
+
+  private
+  def log_job_saved_to_db
+    @search = Search.find(params[:id])
+    render @search
   end
 end

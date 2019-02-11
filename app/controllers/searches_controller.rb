@@ -54,22 +54,8 @@ class SearchesController < ApplicationController
   end
 
   def stats
-    @jobs = Job.all
-    array = []
-    Job.all.each { |e| array << e.company.strip }
-    @companys = array.uniq.sort
-    @recru = @companys.select { |e| e.include?("rec") || e.include?("Rec") }
-
-    # count the number of mentions of company and sort
-    hash = {}
-    array.group_by(&:itself).map { |k, v| hash[k] = v.count }
-    @company_freq = hash.sort_by { |_k, v| v.to_i }.reverse
-
-    # count number of mentions of website and sort
-    hash = {}
-    web = Job.all.map { |e| e.job_website.strip unless e.website.nil? }
-    web2 = web.group_by(&:itself).map { |k, v| hash[k] = v.count }
-    @websites = hash.sort_by { |_k, v| v.to_i }
+    @firms = Firm.all
+    # @firms = @firms.map { |firm| firm.jobs.count }.sort
   end
 
   def dashboard

@@ -3,43 +3,25 @@
   <button class="tablinks" onclick="openCity(event, 'Recruiters')">Recruiters</button>
   <button class="tablinks" onclick="openCity(event, 'All-Companies')">Companies</button>
 </div>
+<script>
+  Chartkick.options[:content_for] = :charts_js
+</script>
 
 <div id="Overall" class="tabcontent text-center">
-  <div class="col-sm-4">
-    Nr of Companys <%= @companys.count %>
-    <br>
-    <% @company_freq[0..9].each do |element| %>
-      <%= element.first %>: <%= element.last %>
-      <br>
-    <% end %>
-  </div>
-  <div class="col-sm-4">
-    Nr of Jobs <%= @jobs.count %>
-  </div>
-  <div class="col-sm-4">
-    Avg Jobs per Company: <%= @jobs.count / @companys.count %>
-  </div>
-  <div class="col-sm-4">
-    <% @websites.reverse.each do |element| %>
-      <%= element.first %>: <%= element.last %>
-      <br>
-    <% end %>
-  </div>
+  <%= line_chart Search.group_by_day(:created_at).count, xtitle: "Days", ytitle: "Searches" %>
+  <%= line_chart Job.group_by_day(:created_at).count, xtitle: "Days", ytitle: "Jobs Scraped" %>
+  <%= line_chart Website.group(:jobs).count %>
 </div>
 
 <div id="Recruiters" class="tabcontent">
-  <% @recru.each do |e| %>
-    <div class="col-sm-4">
-      <%= e %>
-    </div>
-  <% end %>
+
 </div>
 
 <div id="All-Companies" class="tabcontent">
-  <%= line_chart Search.group_by_day(:created_at).count %>
+  <%= line_chart @firms.map { |firm|
+    {name: firm.firm_name, data: firm.gr.count }
+}.first(10)  %>
 </div>
-<script src="/path/to/Chart.bundle.js"></script>
-<script src="chartkick.js"></script>
 
 <script>
 function openCity(evt, cityName) {

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.5.1'
 
-gem 'chartkick', '~> 3.0', '>= 3.0.1'
+gem 'chartkick'
 gem 'nokogiri'
 gem 'ffi'
 gem 'groupdate', '~> 4.1'

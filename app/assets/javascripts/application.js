@@ -1,5 +1,5 @@
 //= require rails-ujs
-//= require jquery
+//= require jquery3
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require Chart.bundle
