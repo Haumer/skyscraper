@@ -3,7 +3,7 @@ class SingleFormatTitleJob < ApplicationJob
 
   def perform(id)
     puts "starting the title formatting ..."
-    Search.find(id).job.each do |e|
+    Search.find(id).jobs.each do |e|
       puts "starting job with id #{e.id}"
       a = []
       e.title.split.map do |c|

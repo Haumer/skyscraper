@@ -2,7 +2,7 @@ class SingleFormatSalaryJob < ApplicationJob
   queue_as :default
 
   def perform(id)
-    Search.find(id).job.each do |job|
+    Search.find(id).jobs.each do |job|
       p job.salary
       if job.salary.scan(/\d/).length == 10
         sa = job.salary.scan(/\d/)
