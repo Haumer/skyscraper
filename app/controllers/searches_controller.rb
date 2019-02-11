@@ -55,7 +55,7 @@ class SearchesController < ApplicationController
 
   def stats
     @firms = Firm.all
-    # @firms = @firms.map { |firm| firm.jobs.count }.sort
+    @firms = @firms.map { |firm| firm.jobs.count }
   end
 
   def dashboard

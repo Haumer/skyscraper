@@ -1,7 +1,4 @@
 class JobsController < ApplicationController
-  after_create_commit :log_job_saved_to_db
-  after_update_commit :log_job_saved_to_db
-
   def index
 
   end
