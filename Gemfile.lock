@@ -224,13 +224,13 @@ DEPENDENCIES
   acts_as_votable (~> 0.11.1)
   autoprefixer-rails
   bootstrap-sass (~> 3.3)
-  chartkick
+  chartkick (~> 3.0, >= 3.0.1)
   devise
   dotenv-rails
   ffi
   font-awesome-sass (~> 5.0.9)
   fusioncharts-rails
-  groupdate
+  groupdate (~> 4.1)
   highcharts-rails
   jbuilder (~> 2.0)
   jquery-rails
