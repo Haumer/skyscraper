@@ -1,7 +1,7 @@
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'Search-History')">Search History</button>
-  <button class="tablinks" onclick="openCity(event, 'Top-Jobs')">Top-Jobs</button>
-  <button class="tablinks" onclick="openCity(event, 'Suggestions')">Suggestions</button>
+  <button class="tablinks" onclick="openTab(event, 'Search-History')">Search History</button>
+  <button class="tablinks" onclick="openTab(event, 'Top-Jobs')">Top-Jobs</button>
+  <button class="tablinks" onclick="openTab(event, 'Suggestions')">Suggestions</button>
 </div>
 
 <div id="Search-History" class="tabcontent text-center">
@@ -46,7 +46,7 @@
 
 
 <script>
-function openCity(evt, cityName) {
+function openTab(evt, tab) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
     for (i = 0; i < tabcontent.length; i++) {
@@ -56,7 +56,7 @@ function openCity(evt, cityName) {
     for (i = 0; i < tablinks.length; i++) {
         tablinks[i].className = tablinks[i].className.replace(" active", "");
     }
-    document.getElementById(cityName).style.display = "block";
+    document.getElementById(tab).style.display = "block";
     evt.currentTarget.className += " active";
 }
 </script>

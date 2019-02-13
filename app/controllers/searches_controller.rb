@@ -1,7 +1,7 @@
-# require 'Nokogiri'
-# require 'open-uri'
+
 
 class SearchesController < ApplicationController
+  respond_to :html, :json
   def index
     @searches = Search.where(user_id: current_user.id)
     @searches_ordered = @searches.order(created_at: :desc)
@@ -9,6 +9,7 @@ class SearchesController < ApplicationController
 
   def show
     @search = Search.find(params[:id])
+
     @jobs = Job.where(search_id: @search.id).order(quality: :desc)
     # if Search.all.map { |e| e.title }.include?(@search.title)
     #   @old_search = Search.where(title: @search.title).last
@@ -44,6 +45,7 @@ class SearchesController < ApplicationController
       @search.pages = Admin.all.first.pages
       if @search.save
         PreRunAllJob.perform_later(@search.title, @search.id)
+        sleep(0.5)
         redirect_to search_path(@search)
         @search_history = SearchHistory.create(search_id: @search.id, user_id: current_user.id)
         @search_history.save

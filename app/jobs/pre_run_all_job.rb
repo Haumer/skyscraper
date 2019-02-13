@@ -373,7 +373,6 @@ class PreRunAllJob < ApplicationJob
     puts "I formatted the Salary"
     SingleFormatTitleJob.perform_later(@id)
     puts "I formatted the Title"
-    sleep(3)
     UpdateQualityJob.perform_later(@id, search_location)
     puts "I updated the quality"
     SingleRemoveDuplicatesJob.perform_later(@id)
@@ -382,6 +381,8 @@ class PreRunAllJob < ApplicationJob
     puts "I have extracted Firms"
 
     # Do something later
-    # @search.save
+    search = Search.where(id: search_id).first
+    search.job_done = true
+    search.save
   end
 end

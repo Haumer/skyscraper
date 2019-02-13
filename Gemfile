@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.5.1'
 
+gem 'turbolinks', '~> 5.2.0'
 gem 'chartkick'
 gem 'nokogiri'
 gem 'ffi'
