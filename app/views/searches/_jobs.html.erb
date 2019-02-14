@@ -63,7 +63,7 @@
     }
     window.onload = function () {
       if (false == <%= @jobs.first.search.job_done %>) {
-        setTimeout(refreshPage, 300);
+        setTimeout(refreshPage, 5000);
       }
     }
   </script>
