@@ -10,13 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190212113020) do
+ActiveRecord::Schema.define(version: 20190217131858) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
     t.integer "pages"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chat_rooms", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -52,6 +58,12 @@ ActiveRecord::Schema.define(version: 20190212113020) do
     t.index ["firm_id"], name: "index_jobs_on_firm_id"
     t.index ["search_id"], name: "index_jobs_on_search_id"
     t.index ["website_id"], name: "index_jobs_on_website_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "scrapers", force: :cascade do |t|
