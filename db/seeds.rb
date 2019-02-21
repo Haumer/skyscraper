@@ -1,3 +1,5 @@
+# Uncomment lines 3-9 if you want to reset everything
+
 # User.all.each { |e| e.destroy }
 # Admin.all.each { |e| e.destroy }
 # Website.all.each { |e| e.destroy }
