@@ -7,7 +7,7 @@ class SearchesController < ApplicationController
   def show
     @search = Search.find(params[:id])
 
-    @jobs = @search.jobs
+    @jobs = @search.jobs.order(quality: :desc)
   end
   def index
     @searches = Search.where(user_id: current_user.id)
@@ -38,7 +38,7 @@ class SearchesController < ApplicationController
       @search.pages = Admin.all.first.pages
       if @search.save
         PreRunAllJob.perform_later(@search.title, @search.id)
-        sleep(0.5)
+        sleep(1)
         respond_to do |format|
           format.html { redirect_to search_path(@search) }
           format.js

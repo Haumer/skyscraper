@@ -1,12 +1,22 @@
+# User.all.each { |e| e.destroy }
+# Admin.all.each { |e| e.destroy }
+# Website.all.each { |e| e.destroy }
+# Search.all.each { |e| e.destroy }
+# Firm.all.each { |e| e.destroy }
+# Job.all.each { |e| e.destroy }
+# SearchHistory.all.each { |e| e.destroy }
+
 u = User.create!(
   email: "admin@admin.admin",
-  password: "admin",
+  password: "admin1",
   admin: true
 )
+puts "Created User with id #{u.id}"
 
 a = Admin.create!(
   pages: 3
 )
+puts "Created Admin with id #{a.id}"
 
 websites = [
   "www.cv-library.co.uk",
@@ -21,26 +31,32 @@ websites = [
 ]
 
 websites.each do |website|
-  Website.create!(website_name: website)
+  w = Website.create!(website_name: website)
+  puts "Created Website with id #{w.id}"
 end
 
 s = Search.create!(
-  title: "dummy search"
+  title: "dummy search",
   user_id: u.id
 )
+puts "Created Search with id #{s.id} and user_id #{s.user_id}"
 
 f = Firm.create!(
   firm_name: "dummy firm"
 )
+puts "Created Firm with id #{f.id}"
 
-Job.create!(
+j = Job.create!(
   title: "dummy job",
   search_id: s.id,
-  website_id: Website.first,
-  firm_id: f.id
+  website_id: Website.first.id,
+  firm_id: f.id,
+  company: "dummy company"
 )
+puts "Created Job with id #{j.id}, search_id #{j.search_id}, website_id #{j.website_id} and firm_id #{j.firm_id}"
 
 sh = SearchHistory.create!(
   user_id: u.id,
   search_id: s.id
 )
+puts "Created SearchHistory with id #{ush.id}, user_id #{sh.user_id} and search_id #{sh.search_id}"

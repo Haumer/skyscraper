@@ -6,7 +6,7 @@ class SearchHistoriesController < ApplicationController
   end
 
   def group_by_job
-    @search_history = SearchHistory.where(id: 7).first
+    @search_history = SearchHistory.where(id: 1).first
     @search_history.search.jobs.group_by { |job| job.website }
   end
 end

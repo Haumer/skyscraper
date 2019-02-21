@@ -12,7 +12,7 @@ class PreRunAllJob < ApplicationJob
     search_id = id
     firm_id = 1
     @id = id
-    search_term = title.downcase
+    search_term = title.downcase.strip
     if search_term.strip.split.count > 1
       search_term = search_term.strip.split.join("%20")
     end
@@ -50,14 +50,14 @@ class PreRunAllJob < ApplicationJob
               title = result_card.search("#js-jobtitle-details").text.strip.gsub(/\u00a0/, '')
               link = "https://www.cv-library.co.uk" + result_card.search(".jobtitle-divider a").first['href']
               location = result_card.search("#js-loc-details").text.strip.gsub(/\n/, "").split.join(" ")
-              company = result_card.search(".agency-link-mobile").text.strip.gsub(/\u00a0/, '')
+              company = result_card.search(".agency-link-mobile").text.strip.gsub(/\u00a0/, '').downcase
               if result_card.search("#js-salary-details").text.strip.gsub(/Â/, "").split("/").first.nil? || result_card.search("#js-salary-details").text.strip.gsub(/Â/, "").split("/").first == ""
                 salary = "-"
               else
                 salary = result_card.search("#js-salary-details").text.strip.gsub(/Â/, "").split("/").first.split("£").join("£ ").gsub(/\u00a0/, '')
               end
               website = "www.cv-library.co.uk"
-              Job.create(
+              p Job.create!(
                 title: title,
                 location: location,
                 job_website: website,
@@ -88,7 +88,7 @@ class PreRunAllJob < ApplicationJob
                 title = result_card.search("h2").text.strip.gsub(/\u00a0/, '')
                 link = result_card.search("a").first['href']
                 location = result_card.search(".location").text.strip.gsub(/\s{1,}/, " ").split("-").first.strip
-                company = result_card.search(".company").text.strip.gsub(/\u00a0/, '')
+                company = result_card.search(".company").text.strip.gsub(/\u00a0/, '').downcase
                 salary = result_card.search(".salary").text.strip.split("£").join("£ ").gsub(/\u00a0/, '')
                 website = "www.jobsite.com"
                 Job.create(
@@ -112,7 +112,7 @@ class PreRunAllJob < ApplicationJob
                 title = result_card.search("h2").text.strip.gsub(/\u00a0/, '')
                 link = result_card.search("a").first['href']
                 location = result_card.search(".location").text.strip.gsub(/\s{1,}/, " ").split("-").first.strip
-                company = result_card.search(".company").text.strip.gsub(/\u00a0/, '')
+                company = result_card.search(".company").text.strip.gsub(/\u00a0/, '').downcase
                 salary = result_card.search(".salary").text.strip.split("£").join("£ ").gsub(/\u00a0/, '')
                 website = "www.jobsite.com"
                 Job.create(
@@ -145,7 +145,7 @@ class PreRunAllJob < ApplicationJob
             title = result_card.search(".jobList-title").text.strip.gsub(/\u00a0/, '')
             link = "https://jobs.escapethecity.org" + result_card.search("a").first['href']
             location = search_location
-            company = link.split("-at-")[1].gsub(/-/, " ").gsub(/\u00a0/, '')
+            company = link.split("-at-")[1].gsub(/-/, " ").gsub(/\u00a0/, '').downcase
             salary = "-"
             website = "www.escapethecity.org"
             Job.create(
@@ -177,7 +177,7 @@ class PreRunAllJob < ApplicationJob
               title = result_card.search("h3").text.strip.gsub(/\u00a0/, '')
               link = "www.jobstoday.co.uk" + result_card.search("a").first['href']
               location = result_card.search(".lister__meta-item--location").text.strip.gsub(/\s{1,}/, " ")
-              company = result_card.search(".lister__meta-item--recruiter").text.strip.gsub(/\u00a0/, '')
+              company = result_card.search(".lister__meta-item--recruiter").text.strip.gsub(/\u00a0/, '').downcase
               salary = result_card.search(".lister__meta-item--salary").text.strip.split("£").join("£ ").gsub(/\u00a0/, '')
               website = "www.jobstoday.co.uk"
               Job.create(
@@ -207,8 +207,8 @@ class PreRunAllJob < ApplicationJob
             if result_card.search(".jobtitle").text.strip.downcase.include?(search_term) && result_card.search('.location').text.strip
               title = result_card.search(".jobtitle").text.strip.gsub(/\u00a0/, '')
               link = "https://www.indeed.co.uk" + result_card.search("a").first['href']
-              company = result_card.search('.company').text.strip
               location = result_card.search('.location').text.strip.gsub(/\u00a0/, '')
+              company = result_card.search('.company').text.strip.gsub(/\u00a0/, '').downcase
               if result_card.search(".no-wrap").text.strip == ""
                 salary = "-"
               else
@@ -245,7 +245,7 @@ class PreRunAllJob < ApplicationJob
               title = result_card.search("h2").text.strip.gsub(/\u00a0/, '')
               link = result_card.search("a").first['href']
               location = result_card.search(".location").text.strip.gsub(/\s{1,}/, " ").split("-").first.strip
-              company = result_card.search(".company").text.strip.gsub(/\u00a0/, '')
+              company = result_card.search(".company").text.strip.gsub(/\u00a0/, '').downcase
               salary = result_card.search(".salary").text.strip.split("£").join("£ ").gsub(/\u00a0/, '')
               website = "www.totaljobs.com"
               Job.create(
@@ -277,7 +277,7 @@ class PreRunAllJob < ApplicationJob
               title = result_card.search(".gtmJobTitleClickResponsive").text.strip.gsub(/\u00a0/, '')
               link = "https://www.reed.co.uk" + result_card.search("a").first['href']
               location = result_card.search(".location").text.strip.gsub(/\s{1,}/, " ")
-              company = result_card.search(".gtmJobListingPostedBy").text.strip.gsub(/\u00a0/, '')
+              company = result_card.search(".gtmJobListingPostedBy").text.strip.gsub(/\u00a0/, '').downcase
               salary = result_card.search(".salary").text.strip.split("£").join("£ ").gsub(/\u00a0/, '')
               website = "www.reed.co.uk"
               Job.create(
@@ -309,7 +309,7 @@ class PreRunAllJob < ApplicationJob
               title = result_card.search(".just_job_title").text.strip.gsub(/\u00a0/, '')
               link = result_card.search("a").first['href']
               location = result_card.search(".location").text.strip.gsub(/\s{1,}/, " ")
-              company = result_card.search(".name").text.strip.gsub(/\u00a0/, '')
+              company = result_card.search(".name").text.strip.gsub(/\u00a0/, '').downcase
               website = "www.ziprecruiter.co.uk"
               salary = "-"
               Job.create(
@@ -347,8 +347,8 @@ class PreRunAllJob < ApplicationJob
         page.search(".job").each do |element|
           title = element.search(".job-title").text.strip.gsub(/\s{1,}/, " ").gsub(/\u00a0/, '')
           salary = element.search(".salary").text.strip.gsub(/\s{1,}/, " ").gsub(/UKP/, "£").gsub(/k /, "000 ").strip.gsub(/\u00a0/, '')
-          company = element.search(".company").text.strip
           location = element.search(".location").text.strip.gsub(/\s{1,}/, " ").strip.gsub(/\u00a0/, '')
+          company = element.search(".company").text.strip.gsub(/\u00a0/, '').downcase
           website = "www.cwjobs.co.uk"
           link = element.search("a").first['href']
           Job.create(

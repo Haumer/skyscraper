@@ -5,6 +5,7 @@ class ExtractCompaniesJob < ApplicationJob
     if Job.last.firm_id == 1
       Job.all.each do |job|
         next unless job.firm.id == 1
+        p job.company
         if job.company.downcase.include?(" ltd") || job.company.downcase.include?(" ltd.")
           job.company = job.company.downcase.strip.chomp(" ltd").chomp(" ltd.")
           p job.company
