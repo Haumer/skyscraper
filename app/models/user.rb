@@ -4,7 +4,6 @@ class User < ApplicationRecord
   acts_as_voter
   has_many :searches
   has_many :search_histories
-  has_many :messages
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 end

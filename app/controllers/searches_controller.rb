@@ -1,24 +1,17 @@
 
 
 class SearchesController < ApplicationController
-  respond_to :html, :json
-  def index
-    @searches = Search.where(user_id: current_user.id)
-    @searches_ordered = @searches.order(created_at: :desc)
-  end
+  # include ActionController::Live
+  respond_to :html, :json, :js
 
   def show
     @search = Search.find(params[:id])
 
-    @jobs = Job.where(search_id: @search.id).order(quality: :desc)
-    # if Search.all.map { |e| e.title }.include?(@search.title)
-    #   @old_search = Search.where(title: @search.title).last
-    #   @jobs = Job.where(search_id: @old_search.id).order(quality: :desc)
-    #   respond_to :html, :js
-    # else
-    #   @jobs = Job.where(search_id: @search.id).order(quality: :desc)
-    #   respond_to :html, :js
-    # end
+    @jobs = @search.jobs
+  end
+  def index
+    @searches = Search.where(user_id: current_user.id)
+    @searches_ordered = @searches.order(created_at: :desc)
   end
 
   def new

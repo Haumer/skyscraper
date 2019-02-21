@@ -58,10 +58,6 @@
     </div>
   </div>
 <% end %>
-<div class="job <%= user_is_jobs_author ? "right" : "" %>">
-  <%= image_tag job.user.avatar_url, class: "avatar" %>
-  <div class="job-content"><%= job.title %></div>
-</div>
 <script type="text/javascript">
   function refreshPage () {
     document.location.reload(true)

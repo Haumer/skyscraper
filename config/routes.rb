@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   end
   devise_for :users
   root to: 'searches#new'
-  resources :scrapers
   resources :searches do
     collection do
       get "common", to: "searches#common"
