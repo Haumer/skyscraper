@@ -47,14 +47,14 @@ class PreRunAllJob < ApplicationJob
           page = Nokogiri::HTML(open("https://www.cv-library.co.uk/search-jobs?distance=15&fp=1&geo=#{search_location}&offset=#{@cvlibrary_counter}&posted=28&q=#{search_term}&salarymax=&salarymin=&salarytype=annum&search=1&tempperm=Any"))
           page.search(".job-search-description").each do |result_card|
             if result_card.search("#js-jobtitle-details").text.strip.downcase.include?(search_term)
-              title = result_card.search("#js-jobtitle-details").text.strip.chomp
+              title = result_card.search("#js-jobtitle-details").text.strip.gsub(/\u00a0/, '')
               link = "https://www.cv-library.co.uk" + result_card.search(".jobtitle-divider a").first['href']
               location = result_card.search("#js-loc-details").text.strip.gsub(/\n/, "").split.join(" ")
-              company = result_card.search(".agency-link-mobile").text.strip
+              company = result_card.search(".agency-link-mobile").text.strip.gsub(/\u00a0/, '')
               if result_card.search("#js-salary-details").text.strip.gsub(/Â/, "").split("/").first.nil? || result_card.search("#js-salary-details").text.strip.gsub(/Â/, "").split("/").first == ""
                 salary = "-"
               else
-                salary = result_card.search("#js-salary-details").text.strip.gsub(/Â/, "").split("/").first.split("£").join("£ ")
+                salary = result_card.search("#js-salary-details").text.strip.gsub(/Â/, "").split("/").first.split("£").join("£ ").gsub(/\u00a0/, '')
               end
               website = "www.cv-library.co.uk"
               Job.create(
@@ -85,11 +85,11 @@ class PreRunAllJob < ApplicationJob
             page = Nokogiri::HTML(open("https://www.jobsite.co.uk/jobs/#{search_term}/in-#{search_location}?radius=20"))
             page.search(".job").each do |result_card|
               if result_card.search("h2").text.strip.downcase.include?(search_term)
-                title = result_card.search("h2").text.strip.chomp
+                title = result_card.search("h2").text.strip.gsub(/\u00a0/, '')
                 link = result_card.search("a").first['href']
                 location = result_card.search(".location").text.strip.gsub(/\s{1,}/, " ").split("-").first.strip
-                company = result_card.search(".company").text.strip
-                salary = result_card.search(".salary").text.strip.split("£").join("£ ")
+                company = result_card.search(".company").text.strip.gsub(/\u00a0/, '')
+                salary = result_card.search(".salary").text.strip.split("£").join("£ ").gsub(/\u00a0/, '')
                 website = "www.jobsite.com"
                 Job.create(
                   title: title,
@@ -109,11 +109,11 @@ class PreRunAllJob < ApplicationJob
             page = Nokogiri::HTML(open("https://www.jobsite.co.uk/jobs/#{search_term}/in-#{search_location}?radius=10&page=#{@jobsite_counter}"))
             page.search(".job").each do |result_card|
               if result_card.search("h2").text.strip.downcase.include?(search_term)
-                title = result_card.search("h2").text.strip.chomp
+                title = result_card.search("h2").text.strip.gsub(/\u00a0/, '')
                 link = result_card.search("a").first['href']
                 location = result_card.search(".location").text.strip.gsub(/\s{1,}/, " ").split("-").first.strip
-                company = result_card.search(".company").text.strip
-                salary = result_card.search(".salary").text.strip.split("£").join("£ ")
+                company = result_card.search(".company").text.strip.gsub(/\u00a0/, '')
+                salary = result_card.search(".salary").text.strip.split("£").join("£ ").gsub(/\u00a0/, '')
                 website = "www.jobsite.com"
                 Job.create(
                   title: title,
@@ -142,10 +142,10 @@ class PreRunAllJob < ApplicationJob
           @escape_the_city_counter += 1
           page = Nokogiri::HTML(open("https://jobs.escapethecity.org/jobs/search?cat=&d=&l=#{search_location}%2C+UK&lat=51.5073509&long=-0.12775829999998223&page=#{@escape_the_city_counter}&q=#{search_term}"))
           page.search(".jobList-intro").each do |result_card|
-            title = result_card.search(".jobList-title").text.strip.chomp
+            title = result_card.search(".jobList-title").text.strip.gsub(/\u00a0/, '')
             link = "https://jobs.escapethecity.org" + result_card.search("a").first['href']
             location = search_location
-            company = link.split("-at-")[1].gsub(/-/, " ").capitalize
+            company = link.split("-at-")[1].gsub(/-/, " ").gsub(/\u00a0/, '')
             salary = "-"
             website = "www.escapethecity.org"
             Job.create(
