@@ -61,4 +61,4 @@ sh = SearchHistory.create!(
   user_id: u.id,
   search_id: s.id
 )
-puts "Created SearchHistory with id #{ush.id}, user_id #{sh.user_id} and search_id #{sh.search_id}"
+puts "Created SearchHistory with id #{sh.id}, user_id #{sh.user_id} and search_id #{sh.search_id}"
