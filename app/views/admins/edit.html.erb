@@ -1,39 +1,41 @@
 <% if current_user.admin == true %>
-<div class="admin-wrapper">
-  <div class="col-xs-4">
-    <div class="admin-search-form">
+  <div class="admin-wrapper">
+    <div class="col-xs-4">
+      <div class="admin-search-form">
 
-      Scraping <%= @admin.pages %>
-      <%= simple_form_for @admin do |f| %>
-        <%= f.input :pages %>
-        <%= f.button :submit %>
-      <% end %>
-    </div>
-  </div>
-  <div class="col-xs-4">
-    <div class="users">
-      <div class="admin-user-cards">
-        <% @users.each do |user| %>
-          <div class="col-xs-12">
-            <div class="admin-user-card">
-              <div class="email">
-                Email: <%= user.email %>
-              </div>
-              <div class="admin-total-searches">
-                Total Searches: <%= user.searches.count %>
-              </div>
-              <div class="admin-last-search">
-                <% unless user.searches.nil? %>
-                  Last Search: <%= distance_of_time_in_words(user.searches.last.created_at, Time.now) %> ago
-                <% end %>
-              </div>
-            </div>
-          </div>
+        Scraping <%= @admin.pages %>
+        <%= simple_form_for @admin do |f| %>
+          <%= f.input :pages %>
+          <%= f.button :submit %>
         <% end %>
       </div>
     </div>
+    <div class="col-xs-4">
+      <div class="users">
+        <div class="admin-user-cards">
+          <% @users.each do |user| %>
+            <div class="col-xs-12">
+              <div class="admin-user-card">
+                <div class="email">
+                  Email: <%= user.email %>
+                </div>
+                <div class="admin-total-searches">
+                  Total Searches: <%= user.searches.count %>
+                </div>
+                <div class="admin-last-search">
+                  <% if user.searches.nil? %>
+                    No Searches yet.
+                  <% else %>
+                    Last Search: <%= distance_of_time_in_words(user.searches.last.created_at, Time.now) %> ago
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 <% end %>
 
 
