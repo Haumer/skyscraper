@@ -38,12 +38,11 @@ class SearchesController < ApplicationController
       @search.pages = Admin.all.first.pages
       if @search.save
         PreRunAllJob.perform_later(@search.title, @search.id)
-        sleep(1)
+        sleep(1.5)
         respond_to do |format|
           format.html { redirect_to search_path(@search) }
           format.js
         end
-
         @search_history = SearchHistory.create(search_id: @search.id, user_id: current_user.id)
         @search_history.save
       else
