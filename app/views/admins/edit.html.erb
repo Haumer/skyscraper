@@ -23,7 +23,7 @@
                   Total Searches: <%= user.searches.count %>
                 </div>
                 <div class="admin-last-search">
-                  <% if user.searches.nil? %>
+                  <% if user.searches.last.created_at.nil? %>
                     No Searches yet.
                   <% else %>
                     Last Search: <%= distance_of_time_in_words(user.searches.last.created_at, Time.now) %> ago
