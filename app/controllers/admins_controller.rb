@@ -6,6 +6,7 @@ class AdminsController < ApplicationController
 
   def edit
     @admin = Admin.find(params[:id])
+    @users = User.all
   end
 
   def update

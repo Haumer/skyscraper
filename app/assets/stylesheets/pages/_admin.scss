@@ -1,0 +1,16 @@
+.admin-user-cards {
+  display: flex;
+}
+
+.admin-wrapper {
+  margin: 25px 25px 0px 25px;
+}
+
+.admin-user-card {
+  margin: 7px 0 7px 7px;
+  padding: 7px 0 7px 10px;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 0 1px 7px rgba(0,0,0,0.19), 0 0px 6px rgba(0,0,0,0.23);
+  transition: 0.4s;
+}
