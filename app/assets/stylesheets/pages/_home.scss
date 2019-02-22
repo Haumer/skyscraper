@@ -1,1 +1,39 @@
 // Specific CSS for your home-page
+
+.button-home {
+}
+
+.pulse {
+  cursor: pointer;
+  box-shadow: 0 0 0;
+  animation: none;
+}
+.pulse:hover {
+  animation: pulse 2s infinite;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0;
+  }
+  70% {
+      -webkit-box-shadow: 0 0 3px;
+  }
+  100% {
+      -webkit-box-shadow: 0 0 0;
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0;
+    box-shadow: 0 0 0;
+  }
+  70% {
+      -moz-box-shadow: 0 0 3px;
+      box-shadow: 0 0 0 3px;
+  }
+  100% {
+      -moz-box-shadow: 0 0 0;
+      box-shadow: 0 0 0;
+  }
+}
