@@ -1,8 +1,13 @@
 <div class="navbar-wagon">
   <!-- Logo -->
-  <%= link_to root_path, class: "navbar-wagon-brand" do %>
-    <%= image_tag "code_icon.png", height: 50 %>
-  <% end %>
+  <div class="navbar-left">
+    <%= link_to root_path, class: "navbar-wagon-brand" do %>
+      <%= image_tag "code_icon.png", height: 50 %>
+    <% end %>
+    <%= simple_form_for Search.new, html: { class: "nav-search"}, :defaults => { :input_html => { :class => "search_bar" }} do |f| %>
+      <%= f.input :title, label: false %>
+    <% end %>
+  </div>
 
   <!-- Right Navigation -->
   <div class="navbar-wagon-right hidden-xs hidden-sm">
