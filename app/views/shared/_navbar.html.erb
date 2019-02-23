@@ -4,8 +4,10 @@
     <%= link_to root_path, class: "navbar-wagon-brand" do %>
       <%= image_tag "code_icon.png", height: 50 %>
     <% end %>
-    <%= simple_form_for Search.new, html: { class: "nav-search"}, :defaults => { :input_html => { :class => "search_bar" }} do |f| %>
-      <%= f.input :title, label: false %>
+    <% unless current_page?(root_path) %>
+      <%= simple_form_for Search.new, html: { class: "nav-search"}, :defaults => { :input_html => { :class => "search_bar", :placeholder => "Search" }} do |f| %>
+        <%= f.input :title, label: false %>
+      <% end %>
     <% end %>
   </div>
 

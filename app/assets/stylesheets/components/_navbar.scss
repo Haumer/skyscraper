@@ -83,11 +83,11 @@
 }
 
 input.search_bar {
-  border: none; outline: none;
+  outline: none;
   width: 75px;
-  border-radius: 55px;
+  border-radius: 35px;
   margin: 15px 25px;
-  padding: 20px 70px 20px 35px;
+  padding: 18px 70px 18px 35px;
   transition: all .3s cubic-bezier(0,0,.5,1.5);
   box-shadow: 0 3px 10px -2px rgba(0,0,0,.1);
   background: rgb(255, 255, 255) url(https://i.imgur.com/seveWIw.png) no-repeat center center;
