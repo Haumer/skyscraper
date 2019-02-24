@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.6.0'
 
+gem 'pg_search'
 gem 'authtrail'
 gem 'turbolinks', '~> 5.2.0'
 gem 'chartkick'

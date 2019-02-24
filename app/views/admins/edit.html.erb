@@ -16,7 +16,7 @@
           <% @users.each do |user| %>
             <div class="admin-user-card">
               <div class="email">
-                Email: <%= user.email %>
+                Email: <%= user.email %> (<%= "admin" if user.admin %>)
               </div>
               <div class="admin-total-searches">
                 Total Searches: <%= user.searches.count %>

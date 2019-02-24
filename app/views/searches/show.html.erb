@@ -1,6 +1,6 @@
 <% if @jobs.length == 0 %>
   <div class="loading">
-      <h3>Loading your jobs!</h3>
+    <h3>Loading your jobs!</h3>
   </div>
 <% else %>
   <% array_of_salary = []%>
@@ -25,23 +25,35 @@
   <% end %>
 
   <div class="container">
-    <div class="overall-info">
-      <div class="search_keyword">
-        <h5>You searched for: <%= @search.title %></h5>
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="overall-info">
+          <div class="search_keyword">
+            <h5>You searched for: <%= @search.title %></h5>
+          </div>
+          <div class="average-salary">
+            <h5>
+              Average Salary of displayed: <%= avg_salary %>
+            </h5>
+          </div>
+          <div class="results">
+            <h5>
+              Nr of Results: <%= @jobs.length %>
+            </h5>
+          </div>
+        </div>
       </div>
-      <div class="average-salary">
-        <h5>
-          Average Salary of displayed: <%= avg_salary %>
-        </h5>
-      </div>
-      <div class="results">
-        <h5>
-          Nr of Results: <%= @jobs.length %>
-        </h5>
-
+      <div class="col-sm-4">
+        <div class="filter">
+          <%= form_tag search_path(@search), method: :get do %>
+            <%= text_field_tag :filter_title, params[:filter_title], class: "form-control", placeholder: "Search Title" %>
+          <% end %>
+        </div>
       </div>
     </div>
-    <%= render "jobs", remote: true %>
+    <div class="row">
+      <%= render "jobs", remote: true %>
+    </div>
   </div>
 <% end %>
 
