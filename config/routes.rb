@@ -6,6 +6,10 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
   devise_for :users
+  devise_scope :user do
+   get '/users/sign_out' => 'devise/sessions#destroy'
+end
+
   root to: 'searches#new'
   resources :searches do
     collection do
@@ -27,8 +31,6 @@ Rails.application.routes.draw do
   resources :firms
   resources :websites
   resources :search_histories
-  resources :messages
-  resources :chat_rooms
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -1,3 +1,7 @@
-<%= @ruby.job.each do |job| %>
-  <%= job.title %>
+<% @ruby.each do |ruby_job| %>
+  <% ruby_job.jobs.each do |job| %>
+    <%= job.title %>
+    <br>
+  <% end %>
+  <br>
 <% end %>

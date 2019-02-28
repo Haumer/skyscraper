@@ -43,6 +43,7 @@ class SearchesController < ApplicationController
       @search = Search.new(search_params)
       @search.user = current_user
       @search.pages = Admin.all.first.pages
+      @search.location = ""
       if @search.save
         PreRunAllJob.perform_later(@search.title, @search.id)
         sleep(1.5)
@@ -76,7 +77,7 @@ class SearchesController < ApplicationController
   end
 
   def common
-    @ruby = Search.where(title: "ruby").last
+    @ruby = Search.where(title: "ruby")
     @javascript = Search.where(title: "javascript").last
     @developer = Search.where(title: "developer").last
     @rails = Search.where(title: "rails")

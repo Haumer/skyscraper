@@ -22,7 +22,7 @@
       Link:
 
       <% if @job.link.include?("https://") %>
-        <%= link_to @job.link do %>
+        <%= link_to @job.link, target: "_blank" do %>
           <%= @job.job_website %>
         <% end %>
       <% else %>
@@ -43,10 +43,10 @@
       <h4>Similar Jobs:</h4>
       <% company_filtered.each do |filtered| %>
       <div class="col-xs-6">
-          <% if filtered.link != @job.link || @job.title != nil %>
-            <% farray = [] %>
-            <% farray << filtered %>
-            <% farray.each do |element|  %>
+        <% if filtered.link != @job.link || @job.title != nil %>
+          <% farray = [] %>
+          <% farray << filtered %>
+          <% farray.each do |element|  %>
           <div class="similar-jobs-card">
             <div>
               Job Title: <%= element.title %>
@@ -69,7 +69,7 @@
             </div>
           </div>
           <% end %>
-          <% end %>
+        <% end %>
       </div>
       <% end %>
     </div>

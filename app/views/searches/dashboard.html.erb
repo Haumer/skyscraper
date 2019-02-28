@@ -9,9 +9,9 @@
     <div class="col-xs-4">
       <div class="card">
         <%= link_to search_path(search_history) do %>
-          <%= search_history.search.title %>
+          <%= search_history.search.title %>,
           <%= search_history.search.location %>
-          <%= search_history.search.created_at %>
+          <%= distance_of_time_in_words(search_history.created_at, Time.now) %> ago
           <%= search_history.search.source %>
         <% end %>
       </div>
