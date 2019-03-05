@@ -15,7 +15,10 @@ class SearchesController < ApplicationController
     else
       @jobs = @search.jobs.order(quality: :desc)
     end
+
+    @links = @search.jobs.map { |job| "'#{job.link}';" }.join(" ")
   end
+
   def index
     @searches = Search.where(user_id: current_user.id)
     @searches_ordered = @searches.order(created_at: :desc)
