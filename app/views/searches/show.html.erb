@@ -177,9 +177,16 @@
 <% end %>
 <script>
 function copyLinks() {
-  const copyText = document.getElementById("copy-links");
-  copyText.select()
+  // const copyText = document.getElementById("copy-links");
+  // copyText.select()
+  // document.execCommand("copy");
+  let tempInput = document.createElement("input");
+  tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+  tempInput.value = "<%= @links %>";
+  document.body.appendChild(tempInput);
+  tempInput.select();
   document.execCommand("copy");
+  document.body.removeChild(tempInput);
 }
 </script>
 

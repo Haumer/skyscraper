@@ -6,17 +6,17 @@ class SearchesController < ApplicationController
 
   def show
     @search = Search.find(params[:id])
-    if params[:filter_title].present? && params[:filter_salary].present?
-      @jobs = @search.jobs.where("title ILIKE ?", "%#{params[:filter_title]}%").where("salary ILIKE ?", "%#{params[:filter_salary]}%").order(quality: :desc)
-    elsif params[:filter_title].present?
-      @jobs = @search.jobs.where("title ILIKE ?", "%#{params[:filter_title]}%").order(quality: :desc)
-    elsif params[:filter_salary].present?
-      @jobs = @search.jobs.where("salary ILIKE ?", "%#{params[:filter_salary]}%").order(quality: :desc)
+    if params[:filter_title].present?
+      sql_query = " \
+        jobs.title ILIKE :query \
+        OR jobs.company ILIKE :query \
+        OR jobs.salary ILIKE :query \
+      "
+      @jobs = @search.jobs.where(sql_query, query: "%#{params[:query]}%").order(quality: :desc)
     else
       @jobs = @search.jobs.order(quality: :desc)
+      @links = @search.jobs.map { |job| "'#{job.link}';" }.join(" ")
     end
-
-    @links = @search.jobs.map { |job| "'#{job.link}';" }.join(" ")
   end
 
   def index

@@ -1,5 +1,13 @@
 // Specific CSS for your home-page
 
+.bg {
+  background-image: url('background.png');
+  height: calc(100vh - 70px);
+  background-size: cover;
+  background-position: left;
+  float: left;
+}
+
 .button-home {
 }
 
