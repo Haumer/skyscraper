@@ -15,7 +15,7 @@ class SearchesController < ApplicationController
       @jobs = @search.jobs.where(sql_query, query: "%#{params[:query]}%").order(quality: :desc)
     else
       @jobs = @search.jobs.order(quality: :desc)
-      @links = @search.jobs.map { |job| "'#{job.link}';" }.join(" ")
+      @links = @search.jobs.map { |job| "#{job.link}???" }.join(" ")
     end
   end
 
