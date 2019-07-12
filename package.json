@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
+    "@shopify/draggable": "^1.0.0-beta.8",
     "bootstrap": "3",
     "chart.js": "^2.7.3",
     "chartkick": "^3.0.2",
