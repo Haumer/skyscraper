@@ -1,18 +1,10 @@
 
 
 class SearchesController < ApplicationController
-  # include ActionController::Live
-  respond_to :html, :json, :js
-
   def show
     @search = Search.find(params[:id])
-    if params[:filter_title].present?
-      sql_query = " \
-        jobs.title ILIKE :query \
-        OR jobs.company ILIKE :query \
-        OR jobs.salary ILIKE :query \
-      "
-      @jobs = @search.jobs.where(sql_query, query: "%#{params[:query]}%").order(quality: :desc)
+    if params[:filter].present?
+       @jobs = Job.global_search(params[:filter]).where(search: @search)
     else
       @jobs = @search.jobs.order(quality: :desc)
       @links = @search.jobs.map { |job| "#{job.link}???" }.join(" ")
@@ -37,7 +29,7 @@ class SearchesController < ApplicationController
   end
 
   def create
-    if Search.all.map { |e| e.title }.include?(search_params[:title].strip) && (Search.where(title: search_params[:title].strip).last.created_at) > (DateTime.now - 180.minutes)
+    if (Search.all.map { |e| e.title }.include?(search_params[:title].strip) && (Search.where(title: search_params[:title].strip).last.created_at) > (DateTime.now - 180.minutes))
       @search = Search.where(title: search_params[:title].strip).last
       redirect_to search_path(@search)
       @search_history = SearchHistory.create(search_id: @search.id, user_id: current_user.id)
