@@ -28,7 +28,7 @@ gem 'font-awesome-sass', '~> 5.0.9'
 gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
-gem 'webpacker'
+gem 'webpacker', '~> 4.0.0'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

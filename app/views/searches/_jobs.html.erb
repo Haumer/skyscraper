@@ -63,13 +63,15 @@
     </div>
   </div>
 <% end %>
-<script type="text/javascript">
-  function refreshPage () {
-    document.location.reload(true)
-  }
-  window.onload = function () {
-    if (false == <%= @jobs.first.search.job_done %>) {
-      setTimeout(refreshPage, 4000);
+<% unless params[:filter].present? %>
+  <script type="text/javascript">
+    function refreshPage () {
+      document.location.reload(true)
     }
-  }
-</script>
+    window.onload = function () {
+      if (false == <%= @jobs.first.search.job_done %>) {
+        setTimeout(refreshPage, 4000);
+      }
+    }
+  </script>
+<% end %>

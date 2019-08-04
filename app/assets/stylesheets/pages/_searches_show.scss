@@ -35,6 +35,14 @@ span {
     border-top-right-radius: 3px;
     text-align: center;
   }
+  input:focus::-webkit-input-placeholder {
+    color: transparent;
+    border: none !important;
+  }
+  input:focus, textarea:focus, select:focus {
+    outline-offset: 0px !important;
+    outline: none !important;
+  }
 }
 
 #copy-button {

@@ -1,4 +1,4 @@
-<% if @jobs.length == 0 %>
+<% if @jobs.length.zero? && !params[:filter].present? %>
   <%= render 'shared/loading' %>
 <% else %>
   <div class="container">
