@@ -1,16 +1,6 @@
 <% if @jobs.length == 0 %>
   <%= render 'shared/loading' %>
 <% else %>
-  <% array_of_salary = []%>
-  <% if array_of_salary.zero? %>
-    <% avg_salary = (array_of_salary.sum / array_of_salary.count).to_s %>
-  <% end %>
-  <% if avg_salary.to_s.length > 3 %>
-    <% chars = avg_salary.chars %>
-    <% array_avg_salary_chars = (chars[(-chars.length..-4)].push(".")).concat(chars[(-3..-1)]) %>
-    <% avg_salary = array_avg_salary_chars.join("") %>
-  <% end %>
-
   <div class="container">
     <div class="row">
       <div class="col-sm-8">
@@ -20,7 +10,7 @@
           </div>
           <div class="average-salary search_show_headers">
             <h5>
-              Average Salary: <%= avg_salary %>
+              Average Salary: <%= @avg_salary %>
             </h5>
           </div>
           <div class="results search_show_headers">
