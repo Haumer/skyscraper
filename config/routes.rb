@@ -11,14 +11,14 @@ Rails.application.routes.draw do
 end
 
   root to: 'searches#new'
-  resources :searches do
+  resources :searches, only: [ :show, :index, :new, :create ] do
     collection do
       get "common", to: "searches#common"
       get "stats", to: "searches#stats"
       get "dashboard", to: "searches#dashboard"
     end
   end
-  resources :jobs do
+  resources :jobs, only: [ :show, :index ] do
     collection do
       get "favourite", to: "jobs#favourite"
     end
@@ -27,10 +27,10 @@ end
       put "dislike" => "jobs#downvote"
     end
   end
-  resources :admins
-  resources :firms
-  resources :websites
-  resources :search_histories
+  resources :admins, only: [ :edit, :show ]
+  resources :firms, only: [ :show, :index ]
+  resources :websites, only: [ :show, :index ]
+  resources :search_histories, only: [ :index ]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
