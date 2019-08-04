@@ -5,6 +5,6 @@ class FirmsController < ApplicationController
 
   def show
     @firm = Firm.find(params[:id])
-    @jobs = Job.where(firm_id: @firm)
+    @jobs = Job.where(firm: @firm)
   end
 end

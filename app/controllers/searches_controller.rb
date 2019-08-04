@@ -22,7 +22,7 @@ class SearchesController < ApplicationController
   end
 
   def index
-    @searches = Search.where(user_id: current_user.id)
+    @searches = Search.where(user: current_user)
     @searches_ordered = @searches.order(created_at: :desc)
   end
 
@@ -42,7 +42,7 @@ class SearchesController < ApplicationController
     if (Search.all.map { |e| e.title }.include?(search_params[:title].strip) && (Search.where(title: search_params[:title].strip).last.created_at) > (DateTime.now - 180.minutes))
       @search = Search.where(title: search_params[:title].strip).last
       redirect_to search_path(@search)
-      @search_history = SearchHistory.create(search_id: @search.id, user_id: current_user.id)
+      @search_history = SearchHistory.create(search: @search, user: current_user)
       @search_history.save
     else
       @search = Search.new(search_params)
@@ -56,7 +56,7 @@ class SearchesController < ApplicationController
           format.html { redirect_to search_path(@search) }
           format.js
         end
-        @search_history = SearchHistory.create(search_id: @search.id, user_id: current_user.id)
+        @search_history = SearchHistory.create(search: @search, user: current_user)
         @search_history.save
       else
         render :new
@@ -72,7 +72,7 @@ class SearchesController < ApplicationController
   def dashboard
     @array = []
     hash = {}
-    @search_histories = SearchHistory.where(user_id: current_user.id)
+    @search_histories = SearchHistory.where(user: current_user)
     @search_histories_ordered = @search_histories.order(created_at: :desc)
 
     @searches = Search.all.where(user_id: current_user.id).order(created_at: :desc)
