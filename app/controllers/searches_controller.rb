@@ -2,21 +2,11 @@ class SearchesController < ApplicationController
   def show
     @search = Search.find(params[:id])
     if params[:filter].present?
-      @jobs = Job.global_search(params[:filter]).where(search: @search)
-      @salaries = @jobs.select { |job| job.salary.scan(/\d/).length > 7 }
-      @avg_salary = 0
-      unless @salaries.empty?
-        @avg_salary = (@salaries.map { |e| e.salary.scan(/\d/)[0..4].join.to_i }.sum / @salaries.length).to_s
-        @avg_salary = "#{@avg_salary[0..1]}.#{@avg_salary[2..4]}"
-      end
+      @jobs = Job.global_search(params[:filter]).where(search: @search).order(quality: :desc)
+      @avg_salary = @search.average_salary(@jobs)
     else
       @jobs = @search.jobs.order(quality: :desc)
-      @salaries = @jobs.select { |job| job.salary.scan(/\d/).length > 7 }
-      @avg_salary = 0
-      unless @salaries.empty?
-        @avg_salary = (@salaries.map { |e| e.salary.scan(/\d/)[0..4].join.to_i }.sum / @salaries.length).to_s
-        @avg_salary = "#{@avg_salary[0..1]}.#{@avg_salary[2..4]}"
-      end
+      @avg_salary = @search.average_salary(@jobs)
       @links = @search.jobs.map { |job| job.link }.join(", ")
     end
   end

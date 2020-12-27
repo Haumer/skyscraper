@@ -2,7 +2,7 @@
   "name": "skyscraper",
   "private": true,
   "dependencies": {
-    "@babel/core": "7.3.3",
+    "@babel/core": "7.5.5",
     "@rails/webpacker": "^4.0.7",
     "@shopify/draggable": "^1.0.0-beta.8",
     "babel": "^6.23.0",

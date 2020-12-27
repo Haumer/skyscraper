@@ -12,5 +12,13 @@ class Search < ApplicationRecord
     using: {
       tsearch: { prefix: true }
     }
-  # multisearchable against: [ :title ]
+
+  def average_salary(jobs)
+    @salaries = jobs.select { |job| job.salary.tr(",£", "").strip.to_i != 0 && job.salary.tr("£,", "").strip.to_i > 20000 }.map {|j| j.salary.tr("£,", "").strip.to_i}
+    @avg_salary = 0
+    unless @salaries.empty?
+      @avg_salary = @salaries.sum / @salaries.size
+    end
+    return @avg_salary
+  end
 end

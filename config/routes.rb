@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   end
   devise_for :users
   devise_scope :user do
-   get '/users/sign_out' => 'devise/sessions#destroy'
-end
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
 
   root to: 'searches#new'
   resources :searches, only: [ :show, :index, :new, :create ] do
@@ -27,10 +27,8 @@ end
       put "dislike" => "jobs#downvote"
     end
   end
-  resources :admins, only: [ :edit, :show ]
+  resources :admins
   resources :firms, only: [ :show, :index ]
   resources :websites, only: [ :show, :index ]
   resources :search_histories, only: [ :index ]
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
