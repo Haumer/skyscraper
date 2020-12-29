@@ -13,6 +13,7 @@ namespace :search do
       "data analyst",
       "software developer"
     ]
+
     puts "Scraping jobs"
     jobs.each do |job_title|
       search = Search.create(title: job_title)
